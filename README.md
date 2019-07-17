@@ -7,3 +7,4 @@
 
 ### Project Logs:
 * Added loanBook.php template, implement read all books from database then display all book in select tag 
+ 
