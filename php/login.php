@@ -3,9 +3,7 @@
 <html>
 <head>
     <title>Library Manager</title>
-    <style>
-    <?php include "../css/form.css"; ?>
-    </style>
+    <?php include "imports.php"; ?>
 </head>
 <body>
 <?php include "navbar.php"; ?>
@@ -24,7 +22,7 @@
         <input type="password" name="password">
     </div>
     <div class="input-group">
-        <button class="btn" name="login_user" type="submit">Login</button>
+        <button class="btn btn-primary" name="login_user" type="submit">Login</button>
     </div>
     <p>
     Not a member? <a href="register.php">Sign up</a>

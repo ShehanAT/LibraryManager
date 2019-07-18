@@ -12,14 +12,33 @@
 	<div class="col-md-12">
 		<form action="issueBook.php" method="post" id="post">
 			<div class="form-group">
+            <?php 
+              $con = mysqli_connect("localhost", "root", "root", "atukoran_db");
+           
+
+            //   echo $book_query_string;
+            ?>
 			<label>Choose Book Title:</label>
-            
-            <?php echo $_SESSION["user_id"]; ?> -->
-            <?php echo $_SESSION["result"]; ?>
+           
 			<select name="book_id" >
               <?php 
               $con = mysqli_connect("localhost", "root", "root", "atukoran_db");
-              $result = mysqli_query($con, "select * from books");
+              //check if book is not already issued
+              $issued_book_id = array();
+              $loan_query = "SELECT * FROM loans";
+              $results = mysqli_query($con, $loan_query);
+             
+              while($row = mysqli_fetch_assoc($results)){
+                  array_push($issued_book_id, $row["book_id"]);
+              }
+              $issued_book_id = array_unique($issued_book_id);
+              $book_query_string = "SELECT * FROM books WHERE book_id NOT IN (";
+              foreach($issued_book_id as $value){
+                  $book_query_string .= $value . " , ";
+              }
+              $book_query_string = rtrim($book_query_string, ", ");
+              $book_query_string .= ");";
+              $result = mysqli_query($con, $book_query_string);
               foreach($result as $value){
                   $book_title = $value["title"];
                   $book_id = $value["book_id"];
@@ -29,6 +48,7 @@
                   </option>
                   ";
               }
+              
               ?>
             </select>
 			</div>

@@ -1,5 +1,6 @@
 <?php 
 session_start();
+// *** loans table MUST contain at least one record for the issueBook functionality to work
 // echo $_SESSION["username"];
 
 $username = "";
@@ -80,7 +81,8 @@ if(isset($_POST["login_user"])){
             $_SESSION["user_id"] = $row["user_id"];
         
             $_SESSION["success"] = "You are now logged in.";
-            header("location: home.php");
+            $_SESSION["loggedIn"] = true;
+            header("location: homeAuth.php");
         }else{
             array_push($errors, "Wrong username and/or password");
         }
@@ -118,12 +120,19 @@ if(isset($_POST["add_book"])){
     }
 }
 if(isset($_POST["issueBook"])){
+
     $book_id = $_POST["book_id"];
     $username = $_SESSION["username"];
     $user_query = "SELECT * FROM users WHERE username='$username' LIMIT 1";
     $result = mysqli_query($db, $user_query);
     $row = mysqli_fetch_assoc($result);
     $user_id = $row["user_id"];
+    
+    //check if book is available
+
+
+
+    //check if current user already loaned the book
 
     $loaned_on = date("Y-m-d");
     $return_by = date("Y-m-d", time() + (21 * 24 * 60 * 60));
