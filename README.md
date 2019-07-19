@@ -7,4 +7,4 @@
 
 ### Project Logs:
 * Added loanBook.php template, implement read all books from database then display all book in select tag 
- 
+* Added boostrap navbar, book uniqueness verification when about to issue book, and display all loans per user section
