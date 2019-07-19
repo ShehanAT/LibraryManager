@@ -11,16 +11,6 @@ session_start();
     <div class="heading">
         <h2>User Profile Page</h2>
     </div>
-    <header class="heading">
-        <nav>
-         <ul>
-            <li><a href="">Profile</a></li>
-            <li><a href="">Issued Books</a></li>
-            <li><a href="">Overdue Books</a></li>
-            <li><a href="">Overdue Fees</a></li>
-         </ul>
-        </nav>
-    </header>
     <div class="issuedBooks__body">
         <h2>Currently Issued Books:</h2>
         <table>
@@ -36,10 +26,9 @@ session_start();
             $query = "SELECT * FROM loans WHERE user_id='$user_id' LIMIT 5";
             $results = mysqli_query($db, $query);
             while($row = mysqli_fetch_assoc($results)){
-                echo $row["book_id"];
                 $book_id = $row["book_id"];
-                $book_loaned_on = $row["loaned_on"];
-                $book_return_by = $row["return_by"];
+                $book_loaned_on = rtrim($row["loaned_on"], '00:00:00');
+                $book_return_by = rtrim($row["return_by"], '00:00:00');
                 $book_query = "SELECT * FROM books WHERE book_id='$book_id' LIMIT 1";
                 $book_result = mysqli_query($db, $book_query);
                 $book = mysqli_fetch_assoc($book_result);

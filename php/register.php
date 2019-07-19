@@ -3,44 +3,45 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <?php include "imports.php"; ?>
     <style>
-    <?php include "../css/form.css"?>
+    /* <?php include "../css/form.css"?> */
     </style>
 </head>
 <body>
-    <?php include "./navbar.php" ?>
+    <?php include "navbar.php" ?>
     <div class="header">
         <h2>Register</h2>
     </div>
 
     <form action="register.php" method="post" id="post">
         <?php include "errors.php"; ?>
-        <div class="input-group">
+        <div class="form-group">
             <label for="username">Username: </label>
-            <input type="text" name="username" value"<?php echo $username; ?>">
+            <input type="text" class="form-control" name="username" value"<?php echo $username; ?>">
         </div>
-        <div class="input-group">
+        <div class="form-group">
             <label for="email">Email: </label>
-            <input type="text" name="email" value="<?php echo $email; ?>">
+            <input type="text" name="email" class="form-control" value="<?php echo $email; ?>">
         </div>
-        <div class="input-group">
+        <div class="form-group">
             <label for="password">Password: </label>
-            <input type="password" name="password">
+            <input type="password" class="form-control" name="password">
         </div>
-        <div class="input-group">
+        <div class="form-group">
             <label for="confirmPassword">Confirm Password: </label>
-            <input type="password" name="confirmPassword">
+            <input type="password" class="form-control" name="confirmPassword">
         </div>
-        <div class="input-group">
+        <div class="form-group">
             <label for="userCode">Current Status:</label>
-            <select name="userCode" value="<?php echo $userCode; ?>" form="post">Current Status: 
+            <select name="userCode" class="form-control" value="<?php echo $userCode; ?>" form="post">Current Status: 
                 <option name="undergrad" value="undergrad">Undergrad Student</option>
                 <option name="grad" value="grad">Grad Student</option>
                 <option name="prof" value="professor">Professor</option>
             </select>
         </div>
-        <div class="input-group" >
-            <button type="submit" class="btn" name="new_user">Register</button>
+        <div class="form-group" >
+            <button type="submit" class="btn btn-primary" name="new_user">Register</button>
         </div>
        
         <p>

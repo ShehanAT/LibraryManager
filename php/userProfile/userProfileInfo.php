@@ -9,23 +9,28 @@
         <h2>Profile Info</h2>
     </div>
    <div class="info">
-    <table class="info__table">
-    <thead class="info__table__head">
-        <th class="info__table__head__heading">Username</th>
-        <th class="info__table__head_heading">Email</th>
-        <th class="info__table__head__heading">User Id</th>
-    </thead>
-    
-    <tbody class="info__table__body">
-    
-    <tr class="info__table__body__row">
-        <td class="info__table__body__row__data">Sample</td>
-        <td class="info__table__body__row__data">Sample</td>
-        <td class="info__table__body__row__data">Sample</td>
-    </tr>
-    
-    </tbody>
-    </table>
+    <?php
+        $db = mysqli_connect("localhost", "root", "root", "atukoran_db");
+        $user_id = $_SESSION["user_id"];
+        $query = "SELECT * FROM users WHERE user_id='$user_id' LIMIT 1";
+        //selecting the user based on stored login session data
+        $result = mysqli_query($db, $query);
+        $row = mysqli_fetch_assoc($result);
+        $username = $row["username"];
+        $email = $row["email"];
+        $user_id = $row["user_id"];
+        echo "
+        <div>
+        <strong>Username: </strong><span>$username</span>
+        </div>
+        <div>
+        <strong>Email: </strong><span>$email</span>
+        </div>
+        <div>
+        <strong>User Id: </strong><span>$user_id</span>
+        </div>
+        ";
+    ?>
    </div>
     
 
