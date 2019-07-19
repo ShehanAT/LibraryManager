@@ -14,7 +14,7 @@
         <h2>Register</h2>
     </div>
 
-    <form action="register.php" method="post" id="post">
+    <form action="register.php" method="post" >
         <?php include "errors.php"; ?>
         <div class="form-group">
             <label for="username">Username: </label>
