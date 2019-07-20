@@ -67,10 +67,20 @@ if(isset($_POST["add_new_user"])){
         mysqli_query($db, $insert_user_query);
         header("location: http://localhost:8888/php/admin/overview.php");
 
+        }
     }
-    $query = "INSERT INTO users (username, email, password) ";
 
-}
+    //Delete User Section
+
+    if(isset($_POST["adminDeleteUser"])){
+        $user_id = $_POST["deleteUser"];
+        // echo "The user id is: " . $user_id;
+        $query = "DELETE FROM users WHERE user_id='$user_id'";
+        mysqli_query($db, $query);
+        header("Location: http://localhost:8888/php/admin/overview.php");
+    }
+
+?>
 
 
 
