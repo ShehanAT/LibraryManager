@@ -47,7 +47,9 @@ include "../adminServer.php";
       <h3>Delete User: </h3>
         <div class="form-group">
         <label for="deleteUser">Select user to be deleted:</label>
+        <?php include "../../errors.php"; ?>
         <select class="form-control" name="deleteUser" >
+        <option value="" default>Pick A User</option>
         <?php 
             $db = mysqli_connect("localhost", "root", "root", "atukoran_db");
             $query = "SELECT * FROM users";

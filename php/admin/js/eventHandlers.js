@@ -21,3 +21,26 @@ function onDeleteUserClick(e){
     
  //   e.target.parentNode.setAttribute("style", "background-color: red;");
 }
+
+
+// Admin Update Section
+
+function selectCategory(e){
+    if(e.value != "invalid"){
+        document.getElementById("selectUpdateRow").style.display = "inline";
+        document.getElementById("selectRowLabel").style.display = "inline";
+    }else{
+        document.getElementById("selectUpdateRow").style.display = "none";
+        document.getElementById("selectRowLabel").style.display = "none";
+    }
+}
+
+function showNewValueField(e){
+    if(e.value != "invalid"){
+        document.getElementById("updateValue").style.display = "inline";
+        document.getElementById("updateUserBtn").style.display = "inline";
+    }else{
+        document.getElementById("updateValue").style.display = "none";
+        document.getElementById("updateUserBtn").style.display = "none";
+    }
+}
