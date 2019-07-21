@@ -49,9 +49,9 @@
                     </a>
                
                     <div class='dropdown-menu' aria-labelledby='navbarDropdown'>
-                        <a href='http://localhost:8888/php/admin/userHandler/addBook.php' class='dropdown-item'>Add Book</a>
-                        <a href='http://localhost:8888/php/admin/userHandler/deleteBook.php' class='dropdown-item'>Delete Book</a>
-                        <a class='dropdown-item' href='http://localhost:8888/php/admin/userHandler/updateBook.php'>Update Book</a>
+                        <a href='http://localhost:8888/php/admin/bookHandler/addBook.php' class='dropdown-item'>Add Book</a>
+                        <a href='http://localhost:8888/php/admin/bookHandler/deleteBook.php' class='dropdown-item'>Delete Book</a>
+                        <a class='dropdown-item' href='http://localhost:8888/php/admin/bookHandler/updateBook.php'>Update Book</a>
                     </div>
                     </li> 
                     ";

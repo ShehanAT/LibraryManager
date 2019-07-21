@@ -169,6 +169,78 @@ if(isset($_POST["add_new_user"])){
         echo "user id is" . $userId . " row to update: " . $updateRow . " new value: " . $updateValue;
     }
 
+
+    // Book Section
+
+    // Add Book Section
+
+    if(isset($_POST["adminAddBook"])){
+        //get new book information
+        $author = $_POST["author"];
+        $title = $_POST["title"];
+        $category = $_POST["category"];
+        $year = $_POST["year"];
+        $isbn = $_POST["isbn"];
+
+        //do validations 
+
+        if(empty($author)){
+            array_push($errors, "Author is required");
+        }
+        if(empty($title)){
+            array_push($errors, "Title is required");
+        }
+        if(empty($category)){
+            array_push($errors, "Category is required");
+        }
+        if(empty($year)){
+            array_push($errors, "Year is required");
+        }
+        if(empty($isbn)){
+            array_push($errors, "ISBN is required");
+        }
+
+        //check is year and ISBN are numbers 
+        if(!is_numeric($year)){
+            array_push($errors, "Year must be a number");
+        }
+        if(!is_numeric($isbn)){
+            array_push($errors, "ISBN must be a number");
+        }
+
+
+        //check if ISBN is unique 
+        $isbn_query = "SELECT * FROM books WHERE isbn='$isbn' LIMIT 1";
+        $isbn_result = mysqli_query($db, $isbn_query);
+        $isbn_book = mysqli_fetch_assoc($isbn_result);
+        if($isbn_book){
+            if($isbn_book["isbn"] === $isbn){
+                array_push($errors, "ISBN is already taken");
+            }
+        }
+
+        //check if title AND author is unique
+        $title_query = "SELECT * FROM books WHERE title='$title' AND author='$author'LIMIT 1";
+        $title_result = mysqli_query($db, $title_query);
+        $title_book = mysqli_fetch_assoc($title_result);
+        if($title_book){
+            echo "title: " . $title_book["title"] . "author " . $title_book["author"] . "category" . $title_book["category"] . "year " . $title_book["year"] . "isbn: " . $title_book["isbn"];
+            if($title_book["title"] === $title && $title_book["author"] === $author){
+                array_push($errors, "A book with the same title and author already exists");
+            }
+        }
+
+        if(count($errors) === 0){
+            $query = "INSERT INTO books(author, title, category, year, isbn)
+            VALUES ('$author', '$title', '$category', '$year', '$isbn')";
+            mysqli_query($db, $query);
+            header("Location: http://localhost:8888/php/admin/overview.php");
+        }
+
+
+
+    }
+
 ?>
 
 
