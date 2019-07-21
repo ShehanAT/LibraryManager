@@ -239,6 +239,7 @@ if(isset($_POST["add_new_user"])){
 
 
 
+<<<<<<< HEAD
     }
 
     // Admin Delete User Section
@@ -255,6 +256,8 @@ if(isset($_POST["add_new_user"])){
             mysqli_query($db, $query);
             header("Location: http://localhost:8888/php/admin/overview.php");
         }
+=======
+>>>>>>> c1eb3f8e5aedaa8f7dc8c6af6f2e0da2b135a408
     }
 
 ?>
