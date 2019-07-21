@@ -5,7 +5,7 @@ include "../adminServer.php";
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Title</title>
+    <title>Library Manager</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -20,7 +20,7 @@ include "../adminServer.php";
       <h3>Update User: </h3>
         <?php include "../../errors.php"; ?>
         <div class="form-group">
-        <label for="deleteUser">Select user to update:</label>
+        <label for="selectUpdateUser">Select user to update:</label>
         <select class="form-control" name="selectUpdateUser" onchange="selectCategory(this)">
             <option value="invalid" default>Pick user</option>
         <?php 
@@ -47,9 +47,9 @@ include "../adminServer.php";
         </select>
         </div>
         <div class="form-group">
-        <label for="deleteUser" style="display: none;" id="selectRowLabel">Select category to update:</label>
+        <label for="selectUpdateRow" style="display: none;" id="selectRowLabel">Select category to update:</label>
         <select class="form-control" name="selectUpdateRow" style="display: none;" id="selectUpdateRow" onchange="showNewValueField(this)">
-            <option value="invalid" default>Pick user category</option>
+            <option value="invalid" default>Pick column</option>
             <option value="username">Username</option>
             <option value="email">Email</option>
             <option value="userType">User Type</option>
@@ -63,7 +63,7 @@ include "../adminServer.php";
           <small id="helpId" class="form-text text-muted">New values must be valid.</small>
         </div>
         <!--  -->
-         <button type="submit" style="display: none;" onClick="javascript: return confirm('Are you sure you want to update this user?')" class="btn btn-primary" name="adminUpdateUser" id="updateUserBtn">Update User</button>
+         <button type="submit" style="display: none;" onClick="javascript: return confirm('Are you sure you want to update this user?')" class="btn btn-primary" name="adminUpdateUser" id="updateBtn">Update User</button>
      </form>
       </div>
     <!-- Optional JavaScript -->

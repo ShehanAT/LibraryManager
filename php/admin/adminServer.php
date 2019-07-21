@@ -99,7 +99,7 @@ if(isset($_POST["add_new_user"])){
 
         //update info validations
         if(empty($updateValue)){
-            array_push($errors, "New Value is required");
+            array_push($errors, "New value is required");
         }
         if($updateRow === "username" || $updateRow === "email"){
             //check if new username, email is unique
@@ -145,7 +145,7 @@ if(isset($_POST["add_new_user"])){
         }
         
         if($updateRow === "user_id"){
-            //check if new userId is unique
+            //check if new user_id is unique
             $query = "SELECT * FROM users WHERE user_id='$updateValue' LIMIT 1";
             $result = mysqli_query($db, $query);
             $user = mysqli_fetch_assoc($result);
@@ -153,6 +153,10 @@ if(isset($_POST["add_new_user"])){
                 if($user["user_id"] == $updateValue){
                     array_push($errors, "User Id already taken");
                 }
+            }
+            //check if new user_id is numeric
+            if(!is_numeric($updateValue)){
+                array_push($errors, "User Id must be a number");
             }
         }
 
@@ -239,7 +243,6 @@ if(isset($_POST["add_new_user"])){
 
 
 
-<<<<<<< HEAD
     }
 
     // Admin Delete User Section
@@ -256,8 +259,89 @@ if(isset($_POST["add_new_user"])){
             mysqli_query($db, $query);
             header("Location: http://localhost:8888/php/admin/overview.php");
         }
-=======
->>>>>>> c1eb3f8e5aedaa8f7dc8c6af6f2e0da2b135a408
+    }
+
+    // Admin Update User Section
+
+    if(isset($_POST["adminUpdateBook"])){
+        $isbn = $_POST["selectUpdateBook"];
+        $updateRow = $_POST["selectUpdateRow"];
+        $updateValue = $_POST["updateValue"];
+
+        if(empty($updateValue) && $updateRow != "category"){
+            array_push($errors, "New value is required");
+        }
+        if($updateRow == "category"){
+            $updateValue = $_POST["selectBookCategory"];
+            if($updateValue == "invalid"){
+                array_push($errors, "Valid book category is required");
+            }
+        }
+
+        if($updateRow === "title"){
+            
+            //check if author and title combo are unique
+            $book_query = "SELECT * FROM books WHERE isbn='$isbn' LIMIT 1";
+            $book_result = mysqli_query($db, $book_query);
+            $book = mysqli_fetch_assoc($book_result);
+            $book_author = $book["author"];
+            $book_title = $book["title"];
+            
+            //look for author of same value 
+            $author_query = "SELECT * FROM books WHERE author='$book_author' AND isbn != '$isbn'";
+            $author_result = mysqli_query($db, $author_query);
+            $author = mysqli_fetch_assoc($author_result);
+            if($author){
+                echo "author title: " . $author["title"];
+                //check if the another book's title is the same as the new value
+                if($author["title"] === $updateValue){
+                    array_push($errors, "A book with the same author and title already exists");
+                }
+            }
+        }
+        if($updateRow === "author"){
+            
+            //check if author and title combo are unique
+            $book_query = "SELECT * FROM books WHERE isbn='$isbn' LIMIT 1";
+            $book_result = mysqli_query($db, $book_query);
+            $book = mysqli_fetch_assoc($book_result);
+            $book_author = $book["author"];
+            $book_title = $book["title"];
+            
+            //look for author of same value 
+            $author_query = "SELECT * FROM books WHERE title='$book_title' AND isbn != '$isbn'";
+            $author_result = mysqli_query($db, $author_query);
+            $author = mysqli_fetch_assoc($author_result);
+            if($author){
+                echo "author title: " . $author["author"];
+                //check if the another book's title is the same as the new value
+                if($author["author"] === $updateValue){
+                    array_push($errors, "A book with the same author and title already exists");
+                }
+            }
+        }
+
+        //check if year is numeric
+        if($updateRow === "year"){
+            if(!is_numeric($updateValue)){
+                array_push($errors, "Year must be a number");
+            }
+        }
+
+        //check if ISBN is numeric 
+        if($updateRow === "isbn"){
+            if(!is_numeric($updateValue)){
+                array_push($errors, "ISBN must be a number");
+            }
+        }
+        if(count($errors) == 0){
+            //passed validations, now update book info
+            $update_query = "UPDATE books 
+            SET $updateRow='$updateValue'
+            WHERE isbn='$isbn'";
+            mysqli_query($db, $update_query);
+            header("Location: http://localhost:8888/php/admin/overview.php");
+        }
     }
 
 ?>

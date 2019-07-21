@@ -38,9 +38,26 @@ function selectCategory(e){
 function showNewValueField(e){
     if(e.value != "invalid"){
         document.getElementById("updateValue").style.display = "inline";
-        document.getElementById("updateUserBtn").style.display = "inline";
+        document.getElementById("updateBtn").style.display = "inline";
     }else{
         document.getElementById("updateValue").style.display = "none";
-        document.getElementById("updateUserBtn").style.display = "none";
+        document.getElementById("updateBtn").style.display = "none";
+    }
+}
+
+function showUpdateBookField(e){
+    if(e.value != "invalid" && e.value != "category"){
+        document.getElementById("updateValue").style.display = "inline";
+        document.getElementById("selectBookCategory").style.display = "none";
+        document.getElementById("updateBtn").style.display = "inline";
+    }
+    else if(e.value != "invalid" && e.value == "category"){
+        document.getElementById("updateValue").style.display = "none";
+        document.getElementById("selectBookCategory").style.display = "inline";
+        document.getElementById("updateBtn").style.display = "inline";
+    }else{
+        document.getElementById("updateValue").style.display = "none";
+        document.getElementById("selectBookCategory").style.display = "none";
+        document.getElementById("updateBtn").style.display = "none";
     }
 }
