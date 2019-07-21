@@ -6,7 +6,7 @@ include "../adminServer.php";
 <!doctype html>
 <html lang="en">
   <head>
-    <title>Title</title>
+    <title>Library Manager</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -15,39 +15,16 @@ include "../adminServer.php";
     <link rel="stylesheet" href="../css/main.css" />
   </head>
   <body>
-    <div class="div"></div>
+   
   <?php include "../../navbar.php"; ?>
-  <div class="allUsers container">
-     
-      <!-- <table class="table">
-          <thead>
-              <tr>
-                  <th>Username</th>
-                  <th>Email</th>
-                  <th>User Type</th>
-                  <th>User Id</th>    
-              </tr>
-          </thead>
-          <tbody>
-
-          </tbody>
-      </table> -->
-      <!-- <div class="deleteButton row">
-        <div class="col-md-4"></div>
-        <div class="col-md-4">
-        <small>* You can only delete one user at a time.</small>
-        <br>
-        <button type="submit" class="btn btn-danger center">Delete User</button>
-        
-        
-        </div>
-        <div class="col-md-4"></div>
-      </div> --> 
+  <div class="deleteUser container">
       <form action="deleteUser.php" method="post">
       <h3>Delete User: </h3>
         <div class="form-group">
         <label for="deleteUser">Select user to be deleted:</label>
+        <?php include "../../errors.php"; ?>
         <select class="form-control" name="deleteUser" >
+        <option value="invalid" default>select user</option>
         <?php 
             $db = mysqli_connect("localhost", "root", "root", "atukoran_db");
             $query = "SELECT * FROM users";
