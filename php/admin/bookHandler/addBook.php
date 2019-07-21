@@ -1,7 +1,7 @@
 <?php 
 session_start();
 include "../adminServer.php";
-?>ß
+?>
 <!doctype html>
 <html lang="en">
   <head>
