@@ -1,10 +1,13 @@
+<?php 
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
-    <?php include "../imports.php" ?>
+    <?php include "../../imports.php" ?>
 </head>
 <body>
-    <?php include "../navbar.php" ?>
+    <?php include "../../navbar.php" ?>
     <div class="heading">
         <h2>User Profile Page</h2>
     </div>

@@ -37,8 +37,26 @@ VALUES ('Shehan Atuk', 'Deep Water', 'Non-Fiction', 2021, 09876543219);
 INSERT INTO books (author, title, category, year, isbn)
 VALUES ('Jane Austen', 'Pride and Prejudice', 'Fiction', 1876, 54321982345);
 
+INSERT INTO books (author, title, category, year, isbn)
+VALUES ('F. Scott Fitzgerald', 'The Great Gatsby', 'Fiction', 1924, 513221982342);
 
+INSERT INTO books (author, title, category, year, isbn)
+VALUES ('Harper Lee', 'To Kill a Mockingbird', 'Fiction', 1956, 543219802349);
 
+INSERT INTO books (author, title, category, year, isbn)
+VALUES ('J.K Rowling', "Harry Potter and the Sorcerers's Stone", 'Fiction', 1999, 5432182249);
+
+INSERT INTO books (author, title, category, year, isbn)
+VALUES ('George Orwell', '1984', 'Fiction', 1984, 54311982349);
+
+INSERT INTO books (author, title, category, year, isbn)
+VALUES ('Fahrenheit 451', 'Ray Bradbury', 'Fiction', 1984, 543119812349);
+
+INSERT INTO books (author, title, category, year, isbn)
+VALUES ('In Cold Blood', 'Truman Capote', 'Non-Fiction', 1966, 5431198123149);
+
+INSERT INTO books (author, title, category, year, isbn)
+VALUES ('Silent Spring', 'Rachel Carson', 'Non-Fiction', 1962, 543119812149);
 
 CREATE TABLE loans (
     book_id INT NOT NULL,
@@ -46,16 +64,25 @@ CREATE TABLE loans (
     loaned_on DATETIME ,
     return_by DATETIME ,
     returned_on DATETIME ,
-    FOREIGN KEY (book_id) REFERENCES books.book_id
+    loan_id INT AUTO_INCREMENT,
+    PRIMARY KEY(loan_id),
+    FOREIGN KEY (book_id) REFERENCES books(book_id),
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
-INSERT INTO loans (book_id, user_id, loaned_on, return_by)
-VALUES (1, 1, '2019-07-21 00:00:00', '2019-08-08 00:00:00');
+INSERT INTO loans (book_id, user_id, loaned_on, return_by, returned_on)
+VALUES (1, 2, '2019-07-21 00:00:00', '2019-08-10 00:00:00', NULL);
 
 
 INSERT INTO loans (book_id, user_id, loaned_on, return_by, returned_on)
-VALUES (1, 1, '2019-01-21 00:00:00', '2019-03-08 00:00:00', '2019-04-18 00:00:00');
+VALUES (2, 2, '2019-07-18 00:00:00', '2019-08-08 00:00:00', NULL);
 
 
-INSERT INTO loans (book_id, user_id, loaned_on, return_by)
-VALUES (1, 1, '2019-08-21 00:00:00', '2019-10-08 00:00:00');
+INSERT INTO loans (book_id, user_id, loaned_on, return_by, returned_on)
+VALUES (3, 1, '2019-02-22 00:00:00', '2019-04-12 00:00:00', '2019-07-21 00:00:00');
+
+INSERT INTO loans (book_id, user_id, loaned_on, return_by, returned_on)
+VALUES (4, 1, '2019-07-18 00:00:00', '2019-08-08 00:00:00', NULL);
+
+INSERT INTO loans (book_id, user_id, loaned_on, return_by, returned_on)
+VALUES (3, 1, '2019-07-21 00:00:00', '2019-08-11 00:00:00', NULL);

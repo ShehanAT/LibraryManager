@@ -21,7 +21,7 @@
             
             </li>
             <li class='nav-item'>
-                <a href='http://localhost:8888/php/register.php' class='nav-link'>Register</a>
+                <a href='http://localhost:8888/php/user/register.php' class='nav-link'>Register</a>
             </li>
             ";
             }
@@ -54,22 +54,28 @@
                         <a class='dropdown-item' href='http://localhost:8888/php/admin/bookHandler/updateBook.php'>Update Book</a>
                     </div>
                     </li> 
+                    <li class='nav-item'>
+                        <a href='http://localhost:8888/php/home.php' class='nav-link'>Log Out</a>
+                    </li>
                     ";
                 }else{
                     echo "
                     <li class='nav-item'>
-                        <a href='http://localhost:8888/php/issueBook.php' class='nav-link'>Issue Book</a>
+                        <a href='http://localhost:8888/php/user/issueBook.php' class='nav-link'>Issue Book</a>
+                    </li>
+                    <li class='nav-item'>
+                        <a href='http://localhost:8888/php/user/returnBook.php' class='nav-link'>Return Book</a>
                     </li>
                     <li class='nav-item dropdown'>
-                    <a class='nav-link dropdown-toggle' href='http://localhost:8888/php/userProfile/userProfileInfo.php' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+                    <a class='nav-link dropdown-toggle' href='http://localhost:8888/php/user/userProfile/userProfileInfo.php' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
                     User Profile
                     </a>
                
                     <div class='dropdown-menu' aria-labelledby='navbarDropdown'>
-                        <a href='http://localhost:8888/php/userProfile/userProfileInfo.php' class='dropdown-item'>Profile Info</a>
-                        <a href='http://localhost:8888/php/userProfile/userIssued.php' class='dropdown-item'>Issued Books</a>
-                        <a class='dropdown-item' href='http://localhost:8888/php/userProfile/userOverdue.php'>Overdue Books</a>
-                        <a class='dropdown-item' href='http://localhost:8888/php/userProfile/userDueFunds.php'>Overdue Fees</a>
+                        <a href='http://localhost:8888/php/user/userProfile/userProfileInfo.php' class='dropdown-item'>Profile Info</a>
+                        <a href='http://localhost:8888/php/user/userProfile/userIssued.php' class='dropdown-item'>Issued Books</a>
+                        <a class='dropdown-item' href='http://localhost:8888/php/user/userProfile/userOverdue.php'>Overdue Books</a>
+                        <a class='dropdown-item' href='http://localhost:8888/php/user/userProfile/userDueFunds.php'>Overdue Fees</a>
                     </div>
                     </li>
                 <li class='nav-item'>

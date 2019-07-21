@@ -136,11 +136,21 @@ if(isset($_POST["issueBook"])){
 
     $loaned_on = date("Y-m-d");
     $return_by = date("Y-m-d", time() + (21 * 24 * 60 * 60));
+    echo "Today is: " . $loaned_on . "Return by: " . $return_by;
     $loan_query = "INSERT INTO loans (book_id, user_id, loaned_on, return_by) 
     VALUES('$book_id', '$user_id', '$loaned_on', '$return_by')";
     $loan_results = mysqli_query($db, $loan_query);
     $row = mysqli_fetch_assoc($loan_results);
     header('Location: ./userProfile/userIssued.php');
+}
+
+// User Return book section
+if(isset($_POST["returnBook"])){
+    $book_id = $_POST["return_book"];
+    
+    //insert current time into returned_on column
+    $returned_on = date("Y-m-d");
+    // $query = "UPDATE"
 }
 
 

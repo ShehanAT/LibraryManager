@@ -1,15 +1,18 @@
-<?php include("server.php"); ?>
+<?php 
+session_start();
+include("../server.php"); 
+?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <?php include "imports.php"; ?>
+    <?php include "../imports.php"; ?>
     <style>
     /* <?php include "../css/form.css"?> */
     </style>
 </head>
 <body>
-    <?php include "navbar.php" ?>
+    <?php include "../navbar.php" ?>
     <div class="header">
         <h2>Register</h2>
     </div>
