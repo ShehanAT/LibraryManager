@@ -72,6 +72,7 @@ session_start();
                 }     
             }
             $overdueFee = $overdueDays * 0.5;
+            $overdueFee = number_format((float)$overdueFee, 2, '.','');
             echo "
             </tbody>
             </table> 
@@ -83,7 +84,7 @@ session_start();
             <strong>Cost per day: <span>$0.50</span></strong>
             </div>
             <div>
-            <strong>Balance Due: <span>$overdueFee</span></strong>   
+            <strong>Balance Due: $<span>$overdueFee</span></strong>   
             </div>
             ";
 

@@ -27,7 +27,6 @@ include "../server.php" ?>
               $loan_query = "SELECT * FROM loans WHERE returned_on IS NULL";
               $results = mysqli_query($con, $loan_query);
               while($row = mysqli_fetch_assoc($results)){
-                  echo $row["book_id"];
                   array_push($issued_book_id, $row["book_id"]);
               }
               $issued_book_id = array_unique($issued_book_id);
