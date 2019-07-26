@@ -13,3 +13,4 @@
 * 2019-07-22:made UI improvements to user overduebooks, and user overduefees sections
 * 2019-07-24: project put on hold
 * 2019-07-24: working on waitlist feature implementation
+* 2019-07-26: added waitlist feature for issued books
