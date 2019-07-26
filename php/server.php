@@ -129,12 +129,10 @@ if(isset($_POST["add_book"])){
 }
 if(isset($_POST["issueBook"])){
 
+    //getting the current logged in user's username and user_id
     $book_id = $_POST["book_id"];
     $username = $_SESSION["username"];
-    $user_query = "SELECT * FROM users WHERE username='$username' LIMIT 1";
-    $result = mysqli_query($db, $user_query);
-    $row = mysqli_fetch_assoc($result);
-    $user_id = $row["user_id"];
+    $user_id = $_SESSION["user_id"];
     
     //check if book is available
 
@@ -142,7 +140,7 @@ if(isset($_POST["issueBook"])){
 
     //check if current user already loaned the book
 
-   // $loaned_on = date("Y-m-d");
+   // adding new loan to database 
     $return_by = date("Y-m-d", time() + (21 * 24 * 60 * 60));//date three weeks from now
     $loaned_on = date('Y-m-d');
     $loan_query = "INSERT INTO loans (book_id, user_id, loaned_on, return_by) 

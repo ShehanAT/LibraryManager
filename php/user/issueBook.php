@@ -1,22 +1,16 @@
 <?php 
 session_start();
-include "../server.php" ?>
-<!doctype html>
+// include "../server.php"; 
+?>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Library Manager</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <?php include "../imports.php" ?>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <?php include "../imports.php"; ?>
   </head>
 
-
 <body>
-<div class="row">
     <?php include "../navbar.php"; ?>
+<div class="row">
 	<div class="col-md-12">
 		<form action="issueBook.php" method="post" id="post">
 			<div class="form-group">
@@ -38,27 +32,35 @@ include "../server.php" ?>
               $book_query_string .= ");";
               $result = mysqli_query($con, $book_query_string);
               if(mysqli_num_rows($result) == 0){
-                echo "<p>All books are loaned out. Please wait untill we have some books available</p>";
+                echo "
+                <p>All books are loaned out. Please wait untill we have some books available</p>
+                </div>
+                </form>
+                ";
               }else{
                 echo "
-                <label>Choose Book Title:</label>
+                <label>Choose Book:</label>
                 <select name='book_id' >
                 ";
                 foreach($result as $value){
                     $book_title = $value["title"];
+                    $book_author = $value["author"];
+                    $book_year = $value["year"];
                     $book_id = $value["book_id"];
                     echo "
                     <option value=$book_id>
-                    $book_title
+                    Title: $book_title | Author: $book_author | Year: $book_year
                     </option>
                     ";
                 }
                 echo " 
                 </select>
                 </div>
-                <div class='input-group'>
+                <div class='form-group'>
                 <button type='submit' class='btn btn-primary' name='issueBook'>Submit</button>
-                </div>";
+                </div>
+                </div>
+                </form>";
               }
               ?>
               <?php 
@@ -101,12 +103,13 @@ include "../server.php" ?>
                   </div>
                   </form>
                   </div>
+                </div>
                   ";
-                }else{
+                }else{//if current user want to be added to multiple waitlists, this removes the waitlists that he is already subscribed to 
                   $book_id = $row["book_id"];
                   $user_id =  $row["user_id"];
                   $exclude_current_waitlist = "(" . $_SESSION["waitlist_book_id"] . ")";
-              
+                  //getting all loans excluding the ones under the current user's name
                   $query = "SELECT * FROM loans WHERE returned_on IS NULL AND user_id != $current_user_id AND book_id != $exclude_current_waitlist";
                   $results = mysqli_query($con, $query);
                   echo "
@@ -143,14 +146,11 @@ include "../server.php" ?>
                   </div>
                   </form>
                   </div>
+                </div>
                   ";
                 }
                
               ?>
-        
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> 
 		
 </body>
 </html>

@@ -67,11 +67,11 @@
                         <a href='http://localhost:8888/php/user/returnBook.php' class='nav-link'>Return Book</a>
                     </li>
                     <li class='nav-item dropdown'>
-                    <a class='nav-link dropdown-toggle' href='http://localhost:8888/php/user/userProfile/userProfileInfo.php' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+                    <a class='nav-link dropdown-toggle' href='http://localhost:8888/php/user/userProfile/userProfileInfo.php' id='navbarUserDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
                     User Profile
                     </a>
                
-                    <div class='dropdown-menu' aria-labelledby='navbarDropdown'>
+                    <div class='dropdown-menu' aria-labelledby='navbarUserDropdown'>
                         <a href='http://localhost:8888/php/user/userProfile/userProfileInfo.php' class='dropdown-item'>Profile Info</a>
                         <a href='http://localhost:8888/php/user/userProfile/userIssued.php' class='dropdown-item'>Issued Books</a>
                         <a class='dropdown-item' href='http://localhost:8888/php/user/userProfile/userOverdue.php'>Overdue Books</a>
