@@ -60,6 +60,7 @@ session_start();
                   <th>Year</th>
                   <th>ISBN</th>
                   <th>Book Id</th>
+                  <th>Book status</th>
               </tr>
           </thead>
           <tbody>
@@ -74,6 +75,18 @@ session_start();
                 $year = $row["year"];
                 $isbn = $row["isbn"];
                 $book_id = $row["book_id"];
+                $book_status = "";
+                switch($row["highPri"]){
+                    case "1":
+                        $book_status = "High priority Book";
+                        break;
+                    case "0":
+                        $book_status = "Regular Book";
+                        break;
+                    default: 
+                        $book_status = "";
+                        break;
+                }
                 echo "
                 <tr>
                     <td scope='row'>$title</td>
@@ -82,6 +95,7 @@ session_start();
                     <td>$year</td>
                     <td>$isbn</td>
                     <td>$book_id</td>
+                    <td>$book_status</td>
                 </tr>
                 ";
             }

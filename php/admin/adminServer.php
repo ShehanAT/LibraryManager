@@ -185,6 +185,7 @@ if(isset($_POST["add_new_user"])){
         $category = $_POST["category"];
         $year = $_POST["year"];
         $isbn = $_POST["isbn"];
+        $highPri = $_POST["highPri"];
 
         //do validations 
 
@@ -234,9 +235,14 @@ if(isset($_POST["add_new_user"])){
             }
         }
 
+        //check if highPri section has value value
+        if($highPri == "invalid"){
+            array_push($errors, "Please indicate whether book is high priority or not.");
+        }
+
         if(count($errors) === 0){
-            $query = "INSERT INTO books(author, title, category, year, isbn)
-            VALUES ('$author', '$title', '$category', '$year', '$isbn')";
+            $query = "INSERT INTO books(author, title, category, year, isbn, highPri)
+            VALUES ('$author', '$title', '$category', '$year', '$isbn', '$highPri')";
             mysqli_query($db, $query);
             header("Location: http://localhost:8888/php/admin/overview.php");
         }

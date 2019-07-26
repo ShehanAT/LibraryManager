@@ -25,6 +25,7 @@ CREATE TABLE books (
 	category VARCHAR(100),
 	year INT,
     isbn BIGINT,
+    highPri BOOLEAN,
     PRIMARY KEY (book_id)
 )
 

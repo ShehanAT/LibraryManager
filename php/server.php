@@ -135,6 +135,7 @@ if(isset($_POST["issueBook"])){
     $user_id = $_SESSION["user_id"];
     
     //make query to find userType which determines the loan period
+    //if book is high priority the reutnr by date is 1 week regardless of userType
     //if user_id = 'undergrad' the return by date is 1 week ahead
     //if user_id = 'grad' the return by date is 2 weeks ahead
     //if user_id = 'professor' the return by date is 3 weeks ahead 
@@ -142,40 +143,52 @@ if(isset($_POST["issueBook"])){
     $userType_result = mysqli_query($db, $userType_query);
     $userType = mysqli_fetch_assoc($userType_result)["userType"];
     echo $userType;
-    if($userType == "undergrad"){
-         // adding new loan to database 
+    //check book priority
+    $book_pri_query = "SELECT * FROM books WHERE book_id='$book_id' LIMIT 1";
+    $book_pri_result = mysqli_query($db, $book_pri_query);
+    $book_pri = mysqli_fetch_assoc($book_pri_result)["highPri"];
+    if($book_pri == "1"){
+        //high priority book, loan period is 1 week
         $return_by = date("Y-m-d", time() + (7 * 24 * 60 * 60));//date three weeks from now
         $loaned_on = date('Y-m-d');
         $loan_query = "INSERT INTO loans (book_id, user_id, loaned_on, return_by) 
         VALUES('$book_id', '$user_id', '$loaned_on', '$return_by')";
         $loan_results = mysqli_query($db, $loan_query);
         $row = mysqli_fetch_assoc($loan_results);
-        header('Location: ./userProfile/userIssued.php');
-    }
-    else if($userType == "grad"){
-         // adding new loan to database 
-        $return_by = date("Y-m-d", time() + (14 * 24 * 60 * 60));//date three weeks from now
-        $loaned_on = date('Y-m-d');
-        $loan_query = "INSERT INTO loans (book_id, user_id, loaned_on, return_by) 
-        VALUES('$book_id', '$user_id', '$loaned_on', '$return_by')";
-        $loan_results = mysqli_query($db, $loan_query);
-        $row = mysqli_fetch_assoc($loan_results);
-        header('Location: ./userProfile/userIssued.php');
-    }
-    else{
-        // adding new loan to database 
-        $return_by = date("Y-m-d", time() + (21 * 24 * 60 * 60));//date three weeks from now
-        $loaned_on = date('Y-m-d');
-        $loan_query = "INSERT INTO loans (book_id, user_id, loaned_on, return_by) 
-        VALUES('$book_id', '$user_id', '$loaned_on', '$return_by')";
-        $loan_results = mysqli_query($db, $loan_query);
-        $row = mysqli_fetch_assoc($loan_results);
-        header('Location: ./userProfile/userIssued.php');
-    }
-
-  
-
-   
+       // header('Location: ./userProfile/userIssued.php');
+    }else{
+        //not high priority book, loan period depends on userType
+        if($userType == "undergrad"){
+            // adding new loan to database 
+           $return_by = date("Y-m-d", time() + (7 * 24 * 60 * 60));//date three weeks from now
+           $loaned_on = date('Y-m-d');
+           $loan_query = "INSERT INTO loans (book_id, user_id, loaned_on, return_by) 
+           VALUES('$book_id', '$user_id', '$loaned_on', '$return_by')";
+           $loan_results = mysqli_query($db, $loan_query);
+           $row = mysqli_fetch_assoc($loan_results);
+          // header('Location: ./userProfile/userIssued.php');
+       }
+       else if($userType == "grad"){
+            // adding new loan to database 
+           $return_by = date("Y-m-d", time() + (14 * 24 * 60 * 60));//date three weeks from now
+           $loaned_on = date('Y-m-d');
+           $loan_query = "INSERT INTO loans (book_id, user_id, loaned_on, return_by) 
+           VALUES('$book_id', '$user_id', '$loaned_on', '$return_by')";
+           $loan_results = mysqli_query($db, $loan_query);
+           $row = mysqli_fetch_assoc($loan_results);
+          // header('Location: ./userProfile/userIssued.php');
+       }
+       else{
+           // adding new loan to database 
+           $return_by = date("Y-m-d", time() + (21 * 24 * 60 * 60));//date three weeks from now
+           $loaned_on = date('Y-m-d');
+           $loan_query = "INSERT INTO loans (book_id, user_id, loaned_on, return_by) 
+           VALUES('$book_id', '$user_id', '$loaned_on', '$return_by')";
+           $loan_results = mysqli_query($db, $loan_query);
+           $row = mysqli_fetch_assoc($loan_results);
+           //header('Location: ./userProfile/userIssued.php');
+       }
+    } 
 }
 
 // User Return book section

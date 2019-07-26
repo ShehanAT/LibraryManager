@@ -43,7 +43,17 @@ include "../adminServer.php";
         <label for="isbn">ISBN:</label>
         <input type="text" name="isbn" id="isbn" class="form-control" placeholder="" aria-describedby="helpId">
     </div>
+    <div class="form-group" >
+        <label for="isbn">High Priority Book?:</label>
+        <select name="highPri">
+          <option value="invalid">Pick book status</option>
+          <option name="highPri"  class="form-control" valuearia-describedby="highPriority" aria-describedby="highPriority" value="1">Yes</option>
+          <option name="highPri"  class="form-control" valuearia-describedby="highPriority" aria-describedby="highPriority" value="0">No</option>
+        </select>  
+    </div>
+    <div class="form-group">
      <button type="submit" class="btn btn-primary" name="adminAddBook">Submit</button>
+    </div>
     </form>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
