@@ -3,13 +3,21 @@ session_start();
 // *** loans table MUST contain at least one record for the issueBook functionality to work
 // echo $_SESSION["username"];
 
-$username = "";
-$email = "";
-$userCode = "";
-$errors = array();
 
-$db = mysqli_connect("localhost", "root", "root", "atukoran_db");
+//function prompt for alerting the user of current interactions
+function prompt($prompt_msg){
+    echo "<script>(function(){ alert('" . $prompt_msg  . "'); })();</script>";
+}
+
+
+
+
+$errors = array();//global array for storing form validation errors
+$db = mysqli_connect("localhost", "root", "root", "atukoran_db");//global mysql connection object
 if(isset($_POST['new_user'])){
+    $username = "";
+    $email = "";
+    $userCode = "";
     $username = mysqli_real_escape_string($db, $_POST["username"]);
     $email = mysqli_real_escape_string($db, $_POST["email"]);
     $password = mysqli_real_escape_string($db, $_POST["password"]);
@@ -209,8 +217,10 @@ if(isset($_POST["add_waitlist"])){
     mysqli_query($db, $query);
     if(!$_SESSION["waitlist_book_id"]){
         $_SESSION["waitlist_book_id"] = $book_id;
+        prompt("You have been added to the waiting list");
     }else{
         $_SESSION["waitlist_book_id"] = $_SESSION["waitlist_book_id"] . ", " . $book_id;
+        prompt("You have been added to the waiting list");
     }
 
 }

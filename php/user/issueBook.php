@@ -64,7 +64,6 @@ include "../server.php" ?>
               <?php 
                 $con = mysqli_connect("localhost", "root", "root", "atukoran_db");
                 $current_user_id = $_SESSION["user_id"];
-                echo "Current user id is: " . $current_user_id;
                 if(!$_SESSION["waitlist_book_id"]){//when it is the first time using waitlist
                   $query = "SELECT * FROM loans WHERE returned_on IS NULL AND user_id != $current_user_id";
                   $results = mysqli_query($con, $query);
@@ -107,7 +106,7 @@ include "../server.php" ?>
                   $book_id = $row["book_id"];
                   $user_id =  $row["user_id"];
                   $exclude_current_waitlist = "(" . $_SESSION["waitlist_book_id"] . ")";
-                  echo "Excluding book id: " . $exclude_current_waitlist;
+              
                   $query = "SELECT * FROM loans WHERE returned_on IS NULL AND user_id != $current_user_id AND book_id != $exclude_current_waitlist";
                   $results = mysqli_query($con, $query);
                   echo "

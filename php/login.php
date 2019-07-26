@@ -1,4 +1,7 @@
-<?php include "server.php"; ?>
+<?php 
+session_start();
+include "server.php"; 
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,7 +30,7 @@
     <p>
     Not a member? <a href="register.php">Sign up</a>
     </p>
-
+ 
 
 
 
