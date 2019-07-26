@@ -12,12 +12,13 @@ session_start();
         <h2>User Profile Page</h2>
     </div>
     <div class="issuedBooks__body">
-        <h2>Currently Issued Books:</h2>
+        <h2>All Issued Books:</h2>
         <table>
         <thead>
             <th>Book Title</th>
             <th>Issued On</th>
             <th>Return By</th>
+            <th>Returned On</th>
         </thead>
         <tbody>
         <?php 
@@ -33,10 +34,12 @@ session_start();
                 $book_result = mysqli_query($db, $book_query);
                 $book = mysqli_fetch_assoc($book_result);
                 $book_title = $book["title"];
+                $book_returned_on = rtrim($row["returned_on"], '00:00:00');
                 echo "<tr class=" . "book". $book_id . ">
                 <td>$book_title</td>
                 <td>$book_loaned_on</td>
                 <td>$book_return_by</td>
+                <td>$book_returned_on</td>
                 </tr>";
             }
 

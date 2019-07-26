@@ -21,6 +21,7 @@ session_start();
         $row = mysqli_fetch_assoc($result);
         $username = $row["username"];
         $email = $row["email"];
+        $userType = $row["userType"];
         $user_id = $row["user_id"];
         echo "
         <div>
@@ -30,8 +31,12 @@ session_start();
         <strong>Email: </strong><span>$email</span>
         </div>
         <div>
+        <strong>User Id: </strong><span>$userType</span>
+        </div>
+        <div>
         <strong>User Id: </strong><span>$user_id</span>
         </div>
+
         ";
     ?>
    </div>
