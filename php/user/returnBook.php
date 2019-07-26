@@ -35,10 +35,11 @@ include "../server.php" ?>
                   //user has no loaned books
                   echo "<p>You have no issued books. <a href='http://localhost:8888/php/user/issueBook.php'>Click here</a> to issue books</p>";
               }else{
+                //user has loaned books
                 echo "
                 <label>Choose book to return :</label>
               
-                <select name='return_book' >
+                <select name='return_book_id' >
                 ";
                 foreach($issued_book_id as $value){
                         $book_query = "SELECT * FROM books WHERE book_id='$value' LIMIT 1";
@@ -48,8 +49,9 @@ include "../server.php" ?>
                         $book_title = $book["title"];
                         $book_category = $book["category"];
                         $book_year = $book["year"];
+                        $book_id = $book["book_id"];
                         echo "
-                        <option value=$book_id>
+                        <option value='$book_id'>
                           Title: $book_title | Author: $book_author | Category: $book_category | Year: $book_year
                         </option>
                         ";    

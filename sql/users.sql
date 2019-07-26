@@ -86,3 +86,18 @@ VALUES (4, 1, '2019-07-18 00:00:00', '2019-08-08 00:00:00', NULL);
 
 INSERT INTO loans (book_id, user_id, loaned_on, return_by, returned_on)
 VALUES (3, 1, '2019-07-21 00:00:00', '2019-08-11 00:00:00', NULL);
+
+-- Waitlist table query 
+
+CREATE TABLE waitlist (
+    `book_id` INT NOT NULL,
+    `user_id` INT NOT NULL,
+    `waitlist_id` INT NULL AUTO_INCREMENT,
+    `isValid` DATETIME NULL,
+    PRIMARY KEY(`book_id`, `user_id`),
+    KEY `waitlist_id` (`waitlist_id`)
+)ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
+
+
+-- left join query for loans and waitlist
+SELECT * FROM loans LEFT JOIN waitlist ON loans.book_id != waitlist.book_id WHERE loans.returned_on IS NULL LIMIT 10

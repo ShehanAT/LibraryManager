@@ -135,7 +135,7 @@ if(isset($_POST["issueBook"])){
     //check if current user already loaned the book
 
    // $loaned_on = date("Y-m-d");
-    $return_by = date("Y-m-d", time() + (21 * 24 * 60 * 60));
+    $return_by = date("Y-m-d", time() + (21 * 24 * 60 * 60));//date three weeks from now
     $loaned_on = date('Y-m-d');
     $loan_query = "INSERT INTO loans (book_id, user_id, loaned_on, return_by) 
     VALUES('$book_id', '$user_id', '$loaned_on', '$return_by')";
@@ -146,13 +146,74 @@ if(isset($_POST["issueBook"])){
 
 // User Return book section
 if(isset($_POST["returnBook"])){
-    $book_id = $_POST["return_book"];
-    
+    $book_id = $_POST["return_book_id"];
+    $returned_on = date("Y-m-d");
+    //check if returning book is waitlisted 
+    $waitlist_query = "SELECT * FROM waitlist WHERE book_id='$book_id'";
+    $waitlist_result = mysqli_query($db, $waitlist_query);
+    $waitlist = mysqli_fetch_assoc($waitlist_result);
+    if($waitlist){//NOT PASSING THRU HERE
+        //the returning book is waitlisted, now issue the book to the first user in line 
+
+        //first return the book like in the else statement
+        $query = "UPDATE loans
+        SET returned_on='$returned_on'
+        WHERE book_id='$book_id' AND returned_on IS NULL LIMIT 1";
+        mysqli_query($db, $query);
+        $current_user = $_SESSION["user_id"];
+        //then issue the book to the next person is line
+        
+        //finding the user id of the next user in line
+        $find_waitlist_user = "SELECT * FROM waitlist WHERE book_id='$book_id' AND user_id!='$current_user' AND isValid IS NULL ORDER BY waitlist_id ASC LIMIT 1";
+        $find_waitlist_result = mysqli_query($db, $find_waitlist_user);
+        $waitlist_user = mysqli_fetch_assoc($find_waitlist_result);
+        $waitlist_user_id = $waitlist_user["user_id"];//this is the new user_id to issue the book to
+
+        //updating the waitlist so the next user in line is null, so the next next user will be the next user in line
+        $current_time = date("Y-m-d");
+        $set_waitlist_query = "UPDATE waitlist 
+        SET isValid='$current_time'
+        WHERE book_id='$book_id' AND user_id='$waitlist_user_id'";
+        mysqli_query($db, $set_waitlist_query);
+        
+        //issue new loan to next user in line
+        $loaned_on = $returned_on;//retuned on data is the new loaned on date for the new issuer
+        $return_by = date("Y-m-d", time() + (21 * 24 * 60 * 60));
+        $issue_query=  "INSERT INTO loans (book_id, user_id, loaned_on, return_by) 
+        VALUES ('$book_id', '$waitlist_user_id', '$loaned_on', '$return_by')";
+        mysqli_query($db, $issue_query);
+        
+        //send a message alerting book has been returned and loaned by the next person waitlisted
+    }else{
+        //find the loan by book_id, then set returned_on to current date
+        
+        $query = "UPDATE loans
+        SET returned_on='$returned_on'
+        WHERE book_id='$book_id' AND returned_on IS NULL LIMIT 1";
+        mysqli_query($db, $query);
+        //send a message alerting book has been returned
+
+    }
+    //if 
     //insert current time into returned_on column
     $returned_on = date("Y-m-d");
     // $query = "UPDATE"
 }
 
+
+// Add user to waitlist 
+if(isset($_POST["add_waitlist"])){
+    $book_id = $_POST["waitlist_value"];
+    $user_id = $_SESSION["user_id"];
+    $query = "INSERT INTO waitlist (book_id, user_id) VALUES ($book_id, $user_id)";
+    mysqli_query($db, $query);
+    if(!$_SESSION["waitlist_book_id"]){
+        $_SESSION["waitlist_book_id"] = $book_id;
+    }else{
+        $_SESSION["waitlist_book_id"] = $_SESSION["waitlist_book_id"] . ", " . $book_id;
+    }
+
+}
 
 
 
