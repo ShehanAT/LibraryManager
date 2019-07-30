@@ -19,7 +19,7 @@ if(isset($_POST['new_user'])){
     $email = mysqli_real_escape_string($db, $_POST["email"]);
     $password = mysqli_real_escape_string($db, $_POST["password"]);
     $confirmPassword = mysqli_real_escape_string($db, $_POST["confirmPassword"]);
-    $userCode = mysqli_real_escape_string($db, $_POST["userCode"]);
+    $userCode = $_POST["userCode"];
 
     if(empty($username)){
         array_push($errors, "Username is required");
