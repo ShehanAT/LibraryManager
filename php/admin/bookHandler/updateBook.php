@@ -53,8 +53,8 @@ include "../adminServer.php";
             class="form-control" name="bookTextVal" id="bookTextVal" aria-describedby="helpId" >
           <small id="helpId" class="form-text text-muted">New values must be valid.</small>
       </div>
-      <div class="form-group" style="display: none;">
-        <label for="updateCategoryValue" id="bookOption">Select category to update:</label>
+      <div class="form-group" style="display: none;" id="bookOption">
+        <label for="updateCategoryValue" >Select category to update:</label>
         <select class="form-control" name="bookOptionVal" id="bookOptionVal" >
             <option value="invalid" default>Pick book category</option>
             <option value="Non-Fiction">Non-Fiction</option>
@@ -63,7 +63,7 @@ include "../adminServer.php";
             <option value="Biography">Biography</option>
         </select>
         </div>
-        <button type="submit" style="display: none;" onClick="javascript: return confirm('Are you sure you want to update this book?')" class="btn btn-primary" name="adminUpdateBook">Update Book</button>
+        <button type="submit" onClick="javascript: return confirm('Are you sure you want to update this book?')" class="btn btn-primary" name="adminUpdateBook">Update Book</button>
       </form>
     </div>
       

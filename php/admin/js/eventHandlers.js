@@ -37,35 +37,37 @@ function selectCategory(e){
 
 function showNewValueField(e, field){
     console.log(e.id);
-    if(e.id === "selectUpdateBook"){
-        if(field === "type"){
-            if(e.value != "invalid"){
-                document.getElementById("updateBookValue").style.display = "inline";
-                document.getElementById("updateBookBtn").style.display = "inline";
-            }else{
-                document.getElementById("updateBookValue").style.display = "none";
-                document.getElementById("updateBookBtn").style.display = "none";
-            }
+    console.log(e.value);
+    if(e.id === "bookColumnVal"){
+        if(e.value != "invalid" && e.value != "category"){
+            //show text field 
+            document.getElementById("bookText").style.display = "inline";
+            document.getElementById("bookOption").style.display = "none";
+        }else if(e.value == "category"){
+            //show select field 
+            document.getElementById("bookText").style.display = "none";
+            document.getElementById("bookOption").style.display = "inline";
         }
-        else if(field === "value"){
-
+        else{
+            //default value picked, hide bookText and bookOption fields
+            document.getElementById("bookText").style.display = "none";
+            document.getElementById("bookOption").style.display = "none";
         }
-      
     }
     else if(e.id === "userColumnVal"){
         if(e.value != "invalid" && e.value != "userType"){
-            //show text field and submit btn
+            //show text field
             document.getElementById("userText").style.display = "inline";
             document.getElementById("userOption").style.display = "none";
             
         }
-        else if(e.value != "invalid" && e.value == "userType"){
-            //show select field and submit btn
+        else if(e.value == "userType"){
+            //show select field 
             document.getElementById("userText").style.display = "none";
             document.getElementById("userOption").style.display = "inline";
             
         }else{
-            //default value picked, hide everything
+            //default value picked, hide userText and userOption fields
             document.getElementById("userText").style.display = "none";
             document.getElementById("userOption").style.display = "none";
             
