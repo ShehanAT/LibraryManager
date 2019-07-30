@@ -14,4 +14,4 @@
 * 2019-07-24: project put on hold
 * 2019-07-24: working on waitlist feature implementation
 * 2019-07-26: added waitlist feature for issued books, added alert popup on adding user to waitlist, fixed navbar dropdown bug in user/issueBook and user/returnBook, added custom loan periods based on userType, fixed formating on /user/userProfile/userIssued.php, added high priority books feature
-* 2019-07-30: refractored admin update user section with simpler form validations
+* 2019-07-30: refractored admin update user, admin update book sections with more readable + simpler form validations
