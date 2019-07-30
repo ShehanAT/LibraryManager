@@ -81,13 +81,24 @@ if(isset($_POST["add_new_user"])){
         }
         if(count($errors) === 0){
             $user_id = $_POST["deleteUser"];
-        
-            $query = "DELETE FROM users WHERE user_id='$user_id'";
-            echo "Query is: " . $query;
-            mysqli_query($db, $query);
-          
             
-            header("Location: http://localhost:8888/php/admin/overview.php");
+            $query = "DELETE FROM users WHERE user_id='$user_id'";
+            mysqli_query($db, $query);
+            if(mysqli_error($db)){
+                $db_error = mysqli_error($db);
+                // the book to be deleted is in the loans table
+                //now show warning prompt then delete the appropriate loans record then the book record
+                echo "<script type='text/javascript'>(function(){ return confirm('Deleting this user will delete all loans associated with this user. Are you sure you want delete this user?')})()</script>";
+                //check if the db error is the right error
+                    //this is the right error
+                    //now delete the loan record
+                $loan_query = "DELETE FROM loans WHERE user_id='$user_id'";
+                mysqli_query($db, $loan_query);
+                //now delete the actual book record
+                $book_query = "DELETE FROM users WHERE user_id='$user_id'";   
+                mysqli_query($db, $book_query);
+            }
+            echo "<script type='text/javascript'>(function(){ return confirm('User successfully deleted!')})()</script>";
         }
     }
 
@@ -293,10 +304,9 @@ if(isset($_POST["add_new_user"])){
                 //now delete the actual book record
                 $book_query = "DELETE FROM books WHERE book_id='$book_id'";   
                 mysqli_query($db, $book_query);
-                header("Location: http://localhost:8888/php/admin/overview.php");
-            }else{
-                header("Location: http://localhost:8888/php/admin/overview.php");
             }
+            echo "<script type='text/javascript'>(function(){ return confirm('Book successfully deleted!')})()</script>";
+            
             
         }
     }
