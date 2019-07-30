@@ -10,6 +10,21 @@ $db = mysqli_connect("localhost", "root", "root", "atukoran_db");
   <body>
       <?php include "../navbar.php"; ?>
       <div class="allUsers container">
+      <?php
+        $chart_result1 = mysqli_query($db, "SELECT category, count(*) as cnt
+        FROM books
+        GROUP BY category");
+        
+        $chart_result2 = mysqli_query($db, "SELECT userType, count(*) as cnt
+        FROM users
+        GROUP BY userType");
+
+         $chart_result3 = mysqli_query($db, "SELECT user_id, count(*) as cnt
+         FROM loans
+         GROUP BY user_id");
+       
+        include "chart_file.php";
+        ?>
       <h3>All Users</h3>
       <table class="table">
           <thead>

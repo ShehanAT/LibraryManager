@@ -170,7 +170,7 @@ if(isset($_POST["issueBook"])){
     $userType_query = "SELECT * FROM users WHERE user_id='$user_id' LIMIT 1";
     $userType_result = mysqli_query($db, $userType_query);
     $userType = mysqli_fetch_assoc($userType_result)["userType"];
-    echo $userType;
+
     //check book priority
     $book_pri_query = "SELECT * FROM books WHERE book_id='$book_id' LIMIT 1";
     $book_pri_result = mysqli_query($db, $book_pri_query);
