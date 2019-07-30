@@ -81,7 +81,7 @@ if(isset($_POST["add_new_user"])){
         }
         if(count($errors) === 0){
             $user_id = $_POST["deleteUser"];
-            // echo "The user id is: " . $user_id;
+        
             $query = "DELETE FROM users WHERE user_id='$user_id'";
             mysqli_query($db, $query);
             header("Location: http://localhost:8888/php/admin/overview.php");
@@ -93,30 +93,49 @@ if(isset($_POST["add_new_user"])){
 
     if(isset($_POST["adminUpdateUser"])){
         //values are valid 
-        $userId = $_POST["selectUpdateUser"];
-        $updateRow = $_POST["selectUpdateRow"];
-        $updateValue = $_POST["updateValue"];
+        $userVal = $_POST["userVal"];
+        $userColumnVal = $_POST["userColumnVal"];
+        $userTextVal = $_POST["userTextVal"];
+        $userOptionVal = $_POST["userOptionVal"];
 
-        //update info validations
-        if(empty($updateValue)){
-            array_push($errors, "New value is required");
+        //doing form validations
+        if($userVal === "invalid"){
+            array_push($errors, "User is required.");
         }
-        if($updateRow === "username" || $updateRow === "email"){
+
+        if($userColumnVal === "invalid"){
+            array_push($errors, "User Column is required.");
+        }
+
+        if($userColumnVal === "userType"){
+            //check if userTextOption is valid
+            if($userOptionVal === "invalid"){
+                array_push($errors, "New user type is required");
+            }
+        }else{
+            //check if userTextVal is not empty
+            if(empty($userTextVal)){
+                array_push($errors, "New user value is required");
+            }
+        }
+
+        
+        if($userColumnVal === "username" || $userColumnVal === "email"){
             //check if new username, email is unique
            
-            $query = "SELECT * FROM users WHERE username='$updateValue' OR email='$updateValue' LIMIT 1";
+            $query = "SELECT * FROM users WHERE username='$userTextVal' OR email='$userTextVal' LIMIT 1";
             $result = mysqli_query($db, $query);
             $user = mysqli_fetch_assoc($result);
             if($user){
                 
-                switch($updateRow){
+                switch($userColumnVal){
                     case "username":
-                        if($user["username"] === $updateValue){
+                        if($user["username"] === $userTextVal){
                             array_push($errors, "Username already taken");
                         }
                         break;
                     case "email":
-                        if($user["email"] === $updateValue){
+                        if($user["email"] === $userTextVal){
                             array_push($errors, "Email already taken");
                         }
                         break;
@@ -125,52 +144,48 @@ if(isset($_POST["add_new_user"])){
                 }
             }
         }
-        if($updateRow === "email"){
-            if(!filter_var($updateValue, FILTER_VALIDATE_EMAIL)){
+        if($userColumnVal === "email"){
+            if(!filter_var($userTextVal, FILTER_VALIDATE_EMAIL)){
                 //check if email is in valid format
                 array_push($errors, "Please enter a valid email address");
             }
           }
-        if($updateRow === "userType"){
-            //check if new userType is undergrad, grad or professor, and not anything else or admin
-             $updateValue = strtolower($updateValue);
-
-            if(strcmp($updateValue, "undergrad") == 0 || strcmp($updateValue, "grad") == 0  || strcmp($updateValue, "professor") == 0 ){
-              
-            }else{
-                echo $updateValue . " is invalid";
-                array_push($errors, "User Type must be either: undergrad, grad or professor");
-            }
-            
-        }
         
-        if($updateRow === "user_id"){
+        if($userColumnVal === "user_id"){
             //check if new user_id is unique
-            $query = "SELECT * FROM users WHERE user_id='$updateValue' LIMIT 1";
+            $query = "SELECT * FROM users WHERE user_id='$userTextVal' LIMIT 1";
             $result = mysqli_query($db, $query);
             $user = mysqli_fetch_assoc($result);
             if($user){
-                if($user["user_id"] == $updateValue){
+                if($user["user_id"] == $userTextVal){
                     array_push($errors, "User Id already taken");
                 }
             }
             //check if new user_id is numeric
-            if(!is_numeric($updateValue)){
+            if(!is_numeric($userTextVal)){
                 array_push($errors, "User Id must be a number");
             }
         }
 
         if(count($errors) == 0){
+    
             //passed validations, now update user info
-            $update_query = "UPDATE users 
-            SET $updateRow='$updateValue'
-            WHERE user_id='$userId'";
-            mysqli_query($db, $update_query);
-            header("Location: http://localhost:8888/php/admin/overview.php");
+            if($userColumnVal === "userType"){
+                $update_query = "UPDATE users 
+                SET userType='$userOptionVal'
+                WHERE user_id='$userVal'";
+                mysqli_query($db, $update_query);
+                header("Location: http://localhost:8888/php/admin/overview.php");
+            }else{
+                $update_query = "UPDATE users 
+                SET $userColumnVal='$userTextVal'
+                WHERE user_id='$userVal'";
+                mysqli_query($db, $update_query);
+                header("Location: http://localhost:8888/php/admin/overview.php");
+            }
+            
         }
 
-
-        echo "user id is" . $userId . " row to update: " . $updateRow . " new value: " . $updateValue;
     }
 
 
@@ -229,7 +244,7 @@ if(isset($_POST["add_new_user"])){
         $title_result = mysqli_query($db, $title_query);
         $title_book = mysqli_fetch_assoc($title_result);
         if($title_book){
-            echo "title: " . $title_book["title"] . "author " . $title_book["author"] . "category" . $title_book["category"] . "year " . $title_book["year"] . "isbn: " . $title_book["isbn"];
+    
             if($title_book["title"] === $title && $title_book["author"] === $author){
                 array_push($errors, "A book with the same title and author already exists");
             }
@@ -260,7 +275,6 @@ if(isset($_POST["add_new_user"])){
         }
         if(count($errors) === 0){
             $isbn = $_POST["deleteBook"];
-            // echo "The user id is: " . $user_id;
             $query = "DELETE FROM books WHERE isbn='$isbn'";
             mysqli_query($db, $query);
             header("Location: http://localhost:8888/php/admin/overview.php");
@@ -270,6 +284,10 @@ if(isset($_POST["add_new_user"])){
     // Admin Update User Section
 
     if(isset($_POST["adminUpdateBook"])){
+        $bookVal = $_POST["bookVal"];//isbn of the selected book
+        $bookColumnVal = $_POST["bookColumnVal"];
+        $bookTextVal = $_POST["bookTextVal"];
+        $bookOptionVal = $_POST["bookOptionVal"];
         $isbn = $_POST["selectUpdateBook"];
         $updateRow = $_POST["selectUpdateRow"];
         $updateValue = $_POST["updateValue"];
@@ -277,88 +295,83 @@ if(isset($_POST["add_new_user"])){
         if(empty($updateValue) && $updateRow != "category"){
             array_push($errors, "New value is required");
         }
-        if($updateRow == "category"){
-            $updateValue = $_POST["selectBookCategory"];
-            if($updateValue == "invalid"){
+        if($bookColumnVal == "category"){
+            if($bookOptionVal == "invalid"){
                 array_push($errors, "Valid book category is required");
             }
         }
 
-        if($updateRow === "title"){
+        if($bookColumnVal === "title"){
             
             //check if author and title combo are unique
-            $book_query = "SELECT * FROM books WHERE isbn='$isbn' LIMIT 1";
+            $book_query = "SELECT * FROM books WHERE isbn='$bookVal' LIMIT 1";
             $book_result = mysqli_query($db, $book_query);
             $book = mysqli_fetch_assoc($book_result);
             $book_author = $book["author"];
             $book_title = $book["title"];
             
             //look for author of same value 
-            $author_query = "SELECT * FROM books WHERE author='$book_author' AND isbn != '$isbn'";
+            $author_query = "SELECT * FROM books WHERE author='$book_author' AND isbn != '$bookVal'";
             $author_result = mysqli_query($db, $author_query);
             $author = mysqli_fetch_assoc($author_result);
             if($author){
-                echo "author title: " . $author["title"];
                 //check if the another book's title is the same as the new value
-                if($author["title"] === $updateValue){
+                if($author["title"] === $bookTextVal){
                     array_push($errors, "A book with the same author and title already exists");
                 }
             }
         }
-        if($updateRow === "author"){
+        if($bookColumnVal === "author"){
             
             //check if author and title combo are unique
-            $book_query = "SELECT * FROM books WHERE isbn='$isbn' LIMIT 1";
+            $book_query = "SELECT * FROM books WHERE isbn='$bookVal' LIMIT 1";
             $book_result = mysqli_query($db, $book_query);
             $book = mysqli_fetch_assoc($book_result);
             $book_author = $book["author"];
             $book_title = $book["title"];
             
             //look for author of same value 
-            $author_query = "SELECT * FROM books WHERE title='$book_title' AND isbn != '$isbn'";
+            $author_query = "SELECT * FROM books WHERE title='$book_title' AND isbn != '$bookVal'";
             $author_result = mysqli_query($db, $author_query);
             $author = mysqli_fetch_assoc($author_result);
             if($author){
-                echo "author title: " . $author["author"];
                 //check if the another book's title is the same as the new value
-                if($author["author"] === $updateValue){
+                if($author["author"] === $bookTextVal){
                     array_push($errors, "A book with the same author and title already exists");
                 }
             }
         }
 
         //check if year is numeric
-        if($updateRow === "year"){
-            if(!is_numeric($updateValue)){
+        if($bookColumnVal === "year"){
+            if(!is_numeric($bookTextVal)){
                 array_push($errors, "Year must be a number");
             }
         }
 
         //check if ISBN is numeric 
-        if($updateRow === "isbn"){
-            if(!is_numeric($updateValue)){
+        if($bookColumnVal === "isbn"){
+            if(!is_numeric($bookTextVal)){
                 array_push($errors, "ISBN must be a number");
             }
         }
         if(count($errors) == 0){
             //passed validations, now update book info
-            $update_query = "UPDATE books 
-            SET $updateRow='$updateValue'
-            WHERE isbn='$isbn'";
-            mysqli_query($db, $update_query);
-            header("Location: http://localhost:8888/php/admin/overview.php");
+            if($bookColumnVal === "category"){
+                $update_query = "UPDATE books 
+                SET category='$bookOptionVal'
+                WHERE isbn='$bookVal'";
+                mysqli_query($db, $update_query);
+                header("Location: http://localhost:8888/php/admin/overview.php");
+            }else{
+                $update_query = "UPDATE books 
+                SET $bookColumnVal='$bookTextVal'
+                WHERE isbn='$bookVal'";
+                mysqli_query($db, $update_query);
+                header("Location: http://localhost:8888/php/admin/overview.php");
+            }
+
         }
     }
-
-?>
-
-
-
-
-
-
-
-
-
 
 ?>

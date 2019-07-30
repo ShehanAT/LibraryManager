@@ -1,6 +1,10 @@
 .deleteSelected {
     background-color: #ff3333;
 }
+.heading {
+    text-align: center;
+}
+
 /* .deleteUser:hover{
     background-color: #ffff99;
 } */

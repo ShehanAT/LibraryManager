@@ -10,7 +10,9 @@ include "../server.php";
 
 <body>
     <?php include "../navbar.php"; ?>
+<div class="container">
 <div class="row">
+
 	<div class="col-md-12">
 		<form action="issueBook.php" method="post" id="post">
 			<div class="form-group">
@@ -151,6 +153,6 @@ include "../server.php";
                 }
                
               ?>
-		
+		</div>
 </body>
 </html>

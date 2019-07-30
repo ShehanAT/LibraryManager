@@ -90,7 +90,12 @@ if(isset($_POST["login_user"])){
         
             $_SESSION["success"] = "You are now logged in.";
             $_SESSION["loggedIn"] = true;
-            header("location: homeAuth.php");
+            if($username == "admin"){
+                header("location: homeAuthAdmin.php");
+            }else{
+                header("location: homeAuthUser.php");
+            }
+            
         }else{
             array_push($errors, "Wrong username and/or password");
         }

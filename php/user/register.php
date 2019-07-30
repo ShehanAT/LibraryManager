@@ -1,15 +1,13 @@
 <?php 
 session_start();
-include("../server.php"); 
+include "../server.php"; 
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <?php include "../imports.php"; ?>
-    <style>
-    /* <?php include "../css/form.css"?> */
-    </style>
+    <title>Library Manager</title>
+    <?php include "../imports.php" ?>
 </head>
 <body>
     <?php include "../navbar.php" ?>

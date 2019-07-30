@@ -8,9 +8,8 @@ session_start();
 </head>
 <body>
     <?php include "../../navbar.php"; ?>
-    <div class="overduefee__head">
-        <h2>User Profile Page</h2>
-    </div>
+    <div class="container">
+   
     <div class="overduefee__body">
         <h2 class="overduefee__body__heading">Overdue Fees:</h2>
         <?php 
@@ -94,7 +93,7 @@ session_start();
         ?>
       
     </div>
-    
+    </div>
 
 
 </body>

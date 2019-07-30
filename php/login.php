@@ -5,7 +5,7 @@ include "server.php";
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Library Manager</title>
+    
     <?php include "imports.php"; ?>
 </head>
 <body>

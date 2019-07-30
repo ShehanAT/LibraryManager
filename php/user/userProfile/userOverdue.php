@@ -8,6 +8,7 @@ session_start();
 </head>
 <body>
     <?php include "../../navbar.php"; ?>
+    <div class="container">
     <div class="heading">
         <h2>User Profile Page</h2>
     </div>
@@ -60,7 +61,7 @@ session_start();
         ?>
        
     </div>
-    
+    </div>
 
 
 </body>

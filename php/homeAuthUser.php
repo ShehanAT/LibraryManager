@@ -10,7 +10,8 @@ session_start();
       <div class="heading">
         
         <h1 class="heading__main">Welcome to Shehan's Library Management System</h1>
-        <h3 class="heading-sub">Made for COMP-3340 Final Project</h3>
+        <h2 class="heading-sub">User Section</h2>
+        <h3 class="heading-sub">Instructions to get started:</h3>
         <ul>
           <li>Click on Issue Books to borrow a book</li>
           <li>Click on User Profile to check profile info, checked out and overdue books</li>
