@@ -28,9 +28,9 @@ include "../adminServer.php";
                 $title = $row["title"];
                 $category = $row["category"];
                 $year = $row["year"];
-                $isbn = $row["isbn"];
+                $book_id = $row["book_id"];
                 echo "
-                    <option value='$isbn'>Title: $title | Author: $author | Category: $category | Year: $year</option>
+                    <option value='$book_id'>Title: $title | Author: $author | Category: $category | Year: $year</option>
                 ";
             }
 

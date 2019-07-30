@@ -83,7 +83,10 @@ if(isset($_POST["add_new_user"])){
             $user_id = $_POST["deleteUser"];
         
             $query = "DELETE FROM users WHERE user_id='$user_id'";
+            echo "Query is: " . $query;
             mysqli_query($db, $query);
+          
+            
             header("Location: http://localhost:8888/php/admin/overview.php");
         }
     }
@@ -274,10 +277,27 @@ if(isset($_POST["add_new_user"])){
             array_push($errors, "Please pick a valid user");
         }
         if(count($errors) === 0){
-            $isbn = $_POST["deleteBook"];
-            $query = "DELETE FROM books WHERE isbn='$isbn'";
+            $book_id = $_POST["deleteBook"];
+            $query = "DELETE FROM books WHERE book_id='$book_id'";
             mysqli_query($db, $query);
-            header("Location: http://localhost:8888/php/admin/overview.php");
+            if(mysqli_error($db)){
+                $db_error = mysqli_error($db);
+                // the book to be deleted is in the loans table
+                //now show warning prompt then delete the appropriate loans record then the book record
+                echo "<script type='text/javascript'>(function(){ return confirm('Deleting this book will delete all loans associated with this book. Are you sure you want delete this book?')})()</script>";
+                //check if the db error is the right error
+                    //this is the right error
+                    //now delete the loan record
+                $loan_query = "DELETE FROM loans WHERE book_id='$book_id'";
+                mysqli_query($db, $loan_query);
+                //now delete the actual book record
+                $book_query = "DELETE FROM books WHERE book_id='$book_id'";   
+                mysqli_query($db, $book_query);
+                header("Location: http://localhost:8888/php/admin/overview.php");
+            }else{
+                header("Location: http://localhost:8888/php/admin/overview.php");
+            }
+            
         }
     }
 
