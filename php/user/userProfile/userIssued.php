@@ -36,6 +36,9 @@ session_start();
                 $book = mysqli_fetch_assoc($book_result);
                 $book_title = $book["title"];
                 $book_returned_on = rtrim($row["returned_on"], '00:00:00');
+                if(!$book_returned_on){
+                    $book_returned_on = "Not returned";
+                }
                 echo "<tr class=" . "book". $book_id . ">
                 <td>$book_title</td>
                 <td>$book_loaned_on</td>

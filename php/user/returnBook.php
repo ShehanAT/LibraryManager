@@ -16,7 +16,7 @@ include "../server.php" ?>
       <div class="row">
        <div class="col-md-12">
        <form action="returnBook.php" method="post" >
-       <div class="form-group">
+       <div class="form-group" id="return_book_select_container">
        <?php 
               $con = mysqli_connect("localhost", "root", "root", "atukoran_db");
               //check if book is not already issued
@@ -38,7 +38,7 @@ include "../server.php" ?>
                 echo "
                 <label>Choose book to return :</label>
               
-                <select name='return_book_id' >
+                <select name='return_book_id' id='return_book_select'>
                 ";
                 foreach($issued_book_id as $value){
                         $book_query = "SELECT * FROM books WHERE book_id='$value' LIMIT 1";
@@ -60,6 +60,8 @@ include "../server.php" ?>
                 <div class='input-group'>
                 <button type='submit' class='btn btn-primary' name='returnBook'>Submit</button>
                 </div>
+                
+                
                 ";
               }
               //get book info from books table

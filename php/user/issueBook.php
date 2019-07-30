@@ -15,7 +15,7 @@ include "../server.php";
 
 	<div class="col-md-12">
 		<form action="issueBook.php" method="post" id="post">
-			<div class="form-group">
+			<div class="form-group" id="issue_book_select_container">
             <?php 
               $con = mysqli_connect("localhost", "root", "root", "atukoran_db");
               //check if book is not already issued
@@ -42,7 +42,7 @@ include "../server.php";
               }else{
                 echo "
                 <label>Choose Book:</label>
-                <select name='book_id' >
+                <select name='book_id' id='issue_book_select' >
                 ";
                 foreach($result as $value){
                     $book_title = $value["title"];
@@ -72,11 +72,11 @@ include "../server.php";
                   $query = "SELECT * FROM loans WHERE returned_on IS NULL AND user_id != $current_user_id";
                   $results = mysqli_query($con, $query);
                   echo "
-                  
+                  <div class='container'>
                   <form action='issueBook.php' method='post'>
                   <div class='waitlist__section form-group'>
                   <h2>Join a waitlist for an issued book:</h2>
-                  <select name='waitlist_value'>
+                  <select name='waitlist_value' id='waitlist_select'>
                   <option value='invalid'>Pick an issued book</option>
                   ";
                   while($row = mysqli_fetch_assoc($results)){
@@ -105,6 +105,7 @@ include "../server.php";
                   </div>
                   </form>
                   </div>
+                </div>
                 </div>
                   ";
                 }else{//if current user want to be added to multiple waitlists, this removes the waitlists that he is already subscribed to 

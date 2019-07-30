@@ -5,6 +5,38 @@
     text-align: center;
 }
 
+/*
+-------------------------
+User Section Styles
+-------------------------
+*/
+#issue_book_select_container {
+  overflow-x: auto;
+}
+#issue_book_select {
+  border: 1px solid;
+}
+#waitlist_select {
+  border: 1px solid;
+}
+
+.waitlist__section {
+  overflow-x: auto;
+}
+
+#return_book_select_container {
+  overflow-x: auto;
+}
+#return_book_select {
+  border: 1px solid;
+}
+
+.issuedBooks__body {
+  overflow-x: auto;
+}
+
+
+
 
 /*
 -------------------------

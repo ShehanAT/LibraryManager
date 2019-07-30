@@ -10,7 +10,9 @@ include "../server.php";
     <?php include "../imports.php" ?>
 </head>
 <body>
+    
     <?php include "../navbar.php" ?>
+    <div class="container">
     <div class="header">
         <h2>Register</h2>
     </div>
@@ -49,6 +51,6 @@ include "../server.php";
             Already a member? <a href="login.php">Sign in</a>
         </p>
     </form>
-
+  </div>
 </body>
 </html>
