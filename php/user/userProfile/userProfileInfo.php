@@ -37,9 +37,11 @@ session_start();
         <div>
         <strong>User Id: </strong><span>$user_id</span>
         </div>
-
         ";
     ?>
+   </div>
+   <div class="editProfile">
+      <button class="btn btn-primary" onClick="javascript: window.location.href= 'http://localhost:8888/php/user/userProfile/userEditProfile.php'">Edit Profile Info</button>
    </div>
   </div>
 

@@ -15,14 +15,11 @@ function prompt($prompt_msg){
 $errors = array();//global array for storing form validation errors
 $db = mysqli_connect("localhost", "root", "root", "atukoran_db");//global mysql connection object
 if(isset($_POST['new_user'])){
-    $username = "";
-    $email = "";
-    $userCode = "";
     $username = mysqli_real_escape_string($db, $_POST["username"]);
     $email = mysqli_real_escape_string($db, $_POST["email"]);
     $password = mysqli_real_escape_string($db, $_POST["password"]);
     $confirmPassword = mysqli_real_escape_string($db, $_POST["confirmPassword"]);
-    $userCode = mysqli_real_escape_string($db, $_POST["userCode"]);
+    $userCode = $_POST["userCode"];
 
     if(empty($username)){
         array_push($errors, "Username is required");
@@ -39,7 +36,7 @@ if(isset($_POST['new_user'])){
     if($password != $confirmPassword){
         array_push($errors, "Passwords do not match");
     }
-    if(empty($userCode)){
+    if($userCode === "invalid"){
         array_push($errors, "Current Status is required");
     }
 
@@ -61,9 +58,14 @@ if(isset($_POST['new_user'])){
         $query = "INSERT INTO users (username, email, password)
                   VALUES('$username', '$email', '$password')";
         mysqli_query($db, $query);
+        //get user_id to assign it to $session variable
+        $user_query = "SELECT * FROM users WHERE username='$username' LIMIT 1";
+        $user_id = mysqli_fetch_assoc(mysqli_query($db, $user_query))["user_id"];
         $_SESSION["username"] = $username;
+        $_SESSION["user_id"] = $user_id;
+        $_SESSION["loggedIn"] = true;
         $_SESSION["success"] = "You are now logged in";
-        header("location: index.php");
+        header("location: homeAuthUser.php");
     }
 }
 
@@ -234,7 +236,7 @@ if(isset($_POST["returnBook"])){
         $issue_query=  "INSERT INTO loans (book_id, user_id, loaned_on, return_by) 
         VALUES ('$book_id', '$waitlist_user_id', '$loaned_on', '$return_by')";
         mysqli_query($db, $issue_query);
-        
+        echo "<script type='text/javascript'>(function(){return confirm('Sucessfully returned book.')}()</script>";
         //send a message alerting book has been returned and loaned by the next person waitlisted
     }else{
         //find the loan by book_id, then set returned_on to current date
@@ -267,6 +269,69 @@ if(isset($_POST["add_waitlist"])){
         prompt("You have been added to the waiting list");
     }
 
+}
+
+if(isset($_POST["userEditInfo"])){
+    $user_id = $_SESSION["user_id"];//used in the where condition of the update query 
+    $editColumnVal = $_POST["editColumnVal"];
+    $editTextVal = $_POST["editTextVal"];
+    $editPasswordVal = $_POST["editPasswordVal"];
+
+    //check if form fields are not empty
+    if($editColumnVal === "invalid"){
+        array_push($errors, "Please select category to edit.");
+    }
+    if($editColumnVal === "password"){
+        if(empty($editPasswordVal)){
+            array_push($errors, "Confirm password cannot be empty");
+        }
+        if($editTextVal != $editPasswordVal){
+            array_push($errors, "Passwords do not matchs.");
+        }
+    }
+    if(empty($editTextVal)){
+        array_push($errors, "Please enter new value.");
+    }
+    //if email is to be updated, do email validations
+      
+    if($editColumnVal === "email"){
+        if(!filter_var($editTextVal, FILTER_VALIDATE_EMAIL)){
+            array_push($errors, "Please enter a valid email address");
+        }
+    }
+  
+
+
+
+    //check if username or email are not already taken 
+    if($editColumnVal === "username" || $editColumnVal === "email"){
+       
+        $check_query = "SELECT * FROM users WHERE username='$editTextVal' OR email='$editTextVal' LIMIT 1";
+        $check = mysqli_fetch_assoc(mysqli_query($db, $check_query));
+        if($check){
+            if($check["username"] == $editTextVal){
+                array_push($errors, "Username is already taken. Please pick a different one.");
+            }
+            if($check["email"] == $editTextVal){
+                array_push($errors, "Email is already taken. Please pick a different one.");
+            }
+            //found user with the same username, throw error
+        }
+        
+          
+    }
+    if(count($errors) === 0){
+        //if password is to be updated hash the new password 
+        if($editColumnVal === "password"){
+            $editTextVal = md5($editTextVal);//hashing the new password before storing into the database   
+        }
+        $query = "UPDATE users
+        SET $editColumnVal='$editTextVal'
+        WHERE user_id='$user_id'";
+        mysqli_query($db, $query);
+        header("Location: http://localhost:8888/php/user/userProfile/userProfileInfo.php");
+    }
+   
 }
 
 

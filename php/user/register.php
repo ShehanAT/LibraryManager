@@ -37,10 +37,11 @@ include "../server.php";
         </div>
         <div class="form-group">
             <label for="userCode">Current Status:</label>
-            <select name="userCode" class="form-control" value="<?php echo $userCode; ?>" form="post">Current Status: 
-                <option name="undergrad" value="undergrad">Undergrad Student</option>
-                <option name="grad" value="grad">Grad Student</option>
-                <option name="prof" value="professor">Professor</option>
+            <select name="userCode" class="form-control">Current Status:
+                <option value="invalid">Pick status</option> 
+                <option value="undergrad">Undergrad Student</option>
+                <option value="grad">Grad Student</option>
+                <option value="professor">Professor</option>
             </select>
         </div>
         <div class="form-group" >
