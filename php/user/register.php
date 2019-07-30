@@ -1,3 +1,4 @@
+
 <?php 
 session_start();
 include "../server.php"; 
@@ -18,14 +19,14 @@ include "../server.php";
     </div>
 
     <form action="register.php" method="post" >
-        <?php include "errors.php"; ?>
+        <?php include "../errors.php"; ?>
         <div class="form-group">
             <label for="username">Username: </label>
-            <input type="text" class="form-control" name="username" value"<?php echo $username; ?>">
+            <input type="text" class="form-control" name="username">
         </div>
         <div class="form-group">
             <label for="email">Email: </label>
-            <input type="text" name="email" class="form-control" value="<?php echo $email; ?>">
+            <input type="text" name="email" class="form-control" >
         </div>
         <div class="form-group">
             <label for="password">Password: </label>
@@ -37,10 +38,11 @@ include "../server.php";
         </div>
         <div class="form-group">
             <label for="userCode">Current Status:</label>
-            <select name="userCode" class="form-control" value="<?php echo $userCode; ?>" form="post">Current Status: 
-                <option name="undergrad" value="undergrad">Undergrad Student</option>
-                <option name="grad" value="grad">Grad Student</option>
-                <option name="prof" value="professor">Professor</option>
+            <select name="userCode" class="form-control">Current Status:
+                <option value="invalid">Pick status</option> 
+                <option value="undergrad">Undergrad Student</option>
+                <option value="grad">Grad Student</option>
+                <option value="professor">Professor</option>
             </select>
         </div>
         <div class="form-group" >

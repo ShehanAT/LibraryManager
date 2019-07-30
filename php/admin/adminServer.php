@@ -322,6 +322,9 @@ if(isset($_POST["add_new_user"])){
         $updateRow = $_POST["selectUpdateRow"];
         $updateValue = $_POST["updateValue"];
 
+        if($bookVal === "invalid"){
+            array_push($errors, "Book is required.");
+        }
         if(empty($bookTextVal) && $bookColumnVal != "category"){
             array_push($errors, "New value is required");
         }

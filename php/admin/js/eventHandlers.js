@@ -50,14 +50,22 @@ function showNewValueField(e, field){
         }
         
     }
+    else if(e.id === "editColumnVal"){
+        if(e.value == "password"){
+            document.getElementById("editText").style.display = "none";
+            document.getElementById("editPassword").style.display = "inline";
+            document.getElementById("editPassword2").style.display = "inline";
+        }else{
+            document.getElementById("editText").style.display = "inline";
+            document.getElementById("editPassword").style.display = "none";
+            document.getElementById("editPassword2").style.display = "none";
+        }
+    }
   
 }
 
 //for the admin update book page
 
-function showUpdateBookField(e){
- 
-}
 
 //for the admin update user page
 function showUpdateUserField(e){

@@ -10,6 +10,7 @@ include "server.php";
 </head>
 <body>
 <?php include "navbar.php"; ?>
+<div class="container">
 <div class="header">
     <h2>Login</h2>
 </div>
@@ -36,5 +37,6 @@ include "server.php";
 
 
 </form>
+</div>
 </body>
 </html>

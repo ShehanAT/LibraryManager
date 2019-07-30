@@ -32,14 +32,16 @@ session_start();
         <strong>Email: </strong><span>$email</span>
         </div>
         <div>
-        <strong>User Id: </strong><span>$userType</span>
+        <strong>User Type: </strong><span>$userType</span>
         </div>
         <div>
         <strong>User Id: </strong><span>$user_id</span>
         </div>
-
         ";
     ?>
+   </div>
+   <div class="editProfile">
+      <button class="btn btn-primary" onClick="javascript: window.location.href= 'http://localhost:8888/php/user/userProfile/userEditProfile.php'">Edit Profile Info</button>
    </div>
   </div>
 
