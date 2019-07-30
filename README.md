@@ -3,6 +3,9 @@
 #### Final Project for COMP-3340
 
 
+### Next Step:
+* Search for book functionality using AJAX calls javascript to php
+
 
 
 ### Project Logs:
