@@ -7,7 +7,25 @@ include "../server.php";
   <head>
     <?php include "../imports.php"; ?>
   </head>
+<script>
+  $(document).ready(function(){
+    $("#searchBook").keyup(function(){
+        $.post("search.php?searchBook=" +  $("#searchBook").val(), function(data, status){
+             $("#searchData").html(data);
+        });
+    });
+    $(".dropdown-content").on("click", function(){
+        console.log("passing");
+        return confirm("Are you sure you want to issue this book?")
+    })
+    $("#searchData").on("focusout", function(){
+      console.log("passing2");
+      $("#searchData").empty();//for emptying search dropdown items on focus out
+    })
 
+});
+
+</script>
 <body>
     <?php include "../navbar.php"; ?>
 <div class="container">
@@ -15,6 +33,12 @@ include "../server.php";
 
 	<div class="col-md-12">
 		<form action="issueBook.php" method="post" id="post">
+      <div class="form-group">
+        <label for="searchBook"></label>
+        <input type="text" id="searchBook" name="searchBook"/>
+        <div id="searchData"></div>
+        <?php require_once "./search.php"; ?>
+      </div>
 			<div class="form-group" id="issue_book_select_container">
             <?php 
               $con = mysqli_connect("localhost", "root", "root", "atukoran_db");
