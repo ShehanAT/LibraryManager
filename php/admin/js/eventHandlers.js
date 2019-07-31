@@ -52,7 +52,7 @@ function showNewValueField(e, field){
     }
     else if(e.id === "editColumnVal"){
         if(e.value == "password"){
-<<<<<<< HEAD
+
             document.getElementById("editText").style.display = "none";
             document.getElementById("editPassword").style.display = "inline";
             document.getElementById("editPassword2").style.display = "inline";
@@ -60,12 +60,6 @@ function showNewValueField(e, field){
             document.getElementById("editText").style.display = "inline";
             document.getElementById("editPassword").style.display = "none";
             document.getElementById("editPassword2").style.display = "none";
-=======
-            document.getElementById("editPassword").style.display = "inline";
-        }else{
-            document.getElementById("editPassword").style.display = "none";
->>>>>>> 670f6b0ed80501337403c74bb1d03232fb820788
-        }
     }
   
 }
