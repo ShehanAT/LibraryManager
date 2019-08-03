@@ -158,7 +158,7 @@ if(isset($_POST["add_book"])){
 if(isset($_POST["issueBook"])){
 
     //getting the current logged in user's username and user_id
-    $book_id = $_POST["book_id"];
+    $book_id = mysqli_real_escape_string($db, $_POST["book_id"]);
     $username = $_SESSION["username"];
     $user_id = $_SESSION["user_id"];
     
@@ -221,7 +221,7 @@ if(isset($_POST["issueBook"])){
 
 // User Return book section
 if(isset($_POST["returnBook"])){
-    $book_id = $_POST["return_book_id"];
+    $book_id = mysqli_real_escape_string($db, $_POST["return_book_id"]);
     $returned_on = date("Y-m-d");
     //check if returning book is waitlisted 
     $waitlist_query = "SELECT * FROM waitlist WHERE book_id='$book_id'";
@@ -278,7 +278,7 @@ if(isset($_POST["returnBook"])){
 
 // Add user to waitlist 
 if(isset($_POST["add_waitlist"])){
-    $book_id = $_POST["waitlist_value"];
+    $book_id = mysqli_real_escape_string($db, $_POST["waitlist_value"]);
     $user_id = $_SESSION["user_id"];
     $query = "INSERT INTO waitlist (book_id, user_id) VALUES ($book_id, $user_id)";
     mysqli_query($db, $query);

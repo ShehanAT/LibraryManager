@@ -30,12 +30,12 @@ include "../adminServer.php";
       <div class="form-group">
         <label for="password">Password:</label>
         <input type="password" name="password" id="password" class="form-control" placeholder="" aria-describedby="helpId">
-        <small id="helpId" class="text-muted">password must be at least 6 characters</small>
+        <small id="helpId" class="text-muted">password should be at least six characters, must contain at least one uppercase letter, one lowercase letter, one number and one special character(ex:!?\/)</small>
       </div>
       <div class="form-group">
         <label for="confirmPassword">Confirm Password:</label>
         <input type="password" name="confirmPassword" id="confirmPassword" class="form-control" placeholder="" aria-describedby="helpId">
-        <small id="helpId" class="text-muted"></small>
+        <small id="helpId" class="text-muted">passwords must match</small>
       </div>
       <div class="form-group">
         <label for="userType">Select User Type:</label>

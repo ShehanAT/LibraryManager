@@ -5,18 +5,18 @@ $errors = array();
 $db = mysqli_connect("localhost", "root", "root", "atukoran_db");
 if(isset($_POST["add_new_user"])){
     //add user form submitted
-    $username = $_POST["username"];
-    $email = $_POST["email"];
-    $userType = $_POST["userType"];
-    $password = $_POST["password"];
-    $confirmPassword = $_POST["confirmPassword"];
+    $username = mysqli_real_escape_string($db, $_POST["username"]);
+    $email = mysqli_real_escape_string($db, $_POST["email"]);
+    $userType = mysqli_real_escape_string($db, $_POST["userType"]);
+    $password = mysqli_real_escape_string($db, $_POST["password"]);
+    $confirmPassword = mysqli_real_escape_string($db, $_POST["confirmPassword"]);
 
     //password validators
     $uppercase = preg_match('@[A-Z]@', $password);
     $lowercase = preg_match('@[a-z]@', $password);
     $number    = preg_match('@[0-9]@', $password);
     $specialChars = preg_match('@[^\w]@', $password);
-    $confirmPassword = $_POST["confirmPassword"];
+    $confirmPassword = mysqli_real_escape_string($db, $_POST["confirmPassword"]);
     if(empty($username)){
         array_push($errors, "Username is required");
     }
@@ -76,11 +76,11 @@ if(isset($_POST["add_new_user"])){
     //Delete User Section
 
     if(isset($_POST["adminDeleteUser"])){
-        if($_POST["deleteUser"] == "invalid"){
+        if(mysqli_real_escape_string($db, $_POST["deleteUser"]) == "invalid"){
             array_push($errors, "Please pick a valid user");
         }
         if(count($errors) === 0){
-            $user_id = $_POST["deleteUser"];
+            $user_id = mysqli_real_escape_string($db, $_POST["deleteUser"]);
             
             $query = "DELETE FROM users WHERE user_id='$user_id'";
             mysqli_query($db, $query);
@@ -107,10 +107,10 @@ if(isset($_POST["add_new_user"])){
 
     if(isset($_POST["adminUpdateUser"])){
         //values are valid 
-        $userVal = $_POST["userVal"];
-        $userColumnVal = $_POST["userColumnVal"];
-        $userTextVal = $_POST["userTextVal"];
-        $userOptionVal = $_POST["userOptionVal"];
+        $userVal = mysqli_real_escape_string($db, $_POST["userVal"]);
+        $userColumnVal = mysqli_real_escape_string($db, $_POST["userColumnVal"]);
+        $userTextVal = mysqli_real_escape_string($db, $_POST["userTextVal"]);
+        $userOptionVal = mysqli_real_escape_string($db, $_POST["userOptionVal"]);
 
         //doing form validations
         if($userVal === "invalid"){
@@ -209,12 +209,12 @@ if(isset($_POST["add_new_user"])){
 
     if(isset($_POST["adminAddBook"])){
         //get new book information
-        $author = $_POST["author"];
-        $title = $_POST["title"];
-        $category = $_POST["category"];
-        $year = $_POST["year"];
-        $isbn = $_POST["isbn"];
-        $highPri = $_POST["highPri"];
+        $author = mysqli_real_escape_string($db, $_POST["author"]);
+        $title = mysqli_real_escape_string($db, $_POST["title"]);
+        $category = mysqli_real_escape_string($db, $_POST["category"]);
+        $year = mysqli_real_escape_string($db, $_POST["year"]);
+        $isbn = mysqli_real_escape_string($db, $_POST["isbn"]);
+        $highPri = mysqli_real_escape_string($db, $_POST["highPri"]);
 
         //do validations 
 
@@ -283,12 +283,12 @@ if(isset($_POST["add_new_user"])){
     // Admin Delete User Section
 
     if(isset($_POST["adminDeleteBook"])){
-        if($_POST["deleteBook"] == "invalid"){
+        if(mysqli_real_escape_string($db, $_POST["deleteBook"]) == "invalid"){
             //cannot delete default value
             array_push($errors, "Please pick a valid user");
         }
         if(count($errors) === 0){
-            $book_id = $_POST["deleteBook"];
+            $book_id = mysqli_real_escape_string($db, $_POST["deleteBook"]);
             $query = "DELETE FROM books WHERE book_id='$book_id'";
             mysqli_query($db, $query);
             if(mysqli_error($db)){
@@ -314,13 +314,13 @@ if(isset($_POST["add_new_user"])){
     // Admin Update User Section
 
     if(isset($_POST["adminUpdateBook"])){
-        $bookVal = $_POST["bookVal"];//isbn of the selected book
-        $bookColumnVal = $_POST["bookColumnVal"];
-        $bookTextVal = $_POST["bookTextVal"];
-        $bookOptionVal = $_POST["bookOptionVal"];
-        $isbn = $_POST["selectUpdateBook"];
-        $updateRow = $_POST["selectUpdateRow"];
-        $updateValue = $_POST["updateValue"];
+        $bookVal = mysqli_real_escape_string($db, $_POST["bookVal"]);//isbn of the selected book
+        $bookColumnVal = mysqli_real_escape_string($db, $_POST["bookColumnVal"]);
+        $bookTextVal = mysqli_real_escape_string($db, $_POST["bookTextVal"]);
+        $bookOptionVal = mysqli_real_escape_string($db, $_POST["bookOptionVal"]);
+        $isbn = mysqli_real_escape_string($db, $_POST["selectUpdateBook"]);
+        $updateRow = mysqli_real_escape_string($db, $_POST["selectUpdateRow"]);
+        $updateValue = mysqli_real_escape_string($db, $_POST["updateValue"]);
 
         if($bookVal === "invalid"){
             array_push($errors, "Book is required.");

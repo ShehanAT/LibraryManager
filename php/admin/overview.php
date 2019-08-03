@@ -199,7 +199,7 @@ $db = mysqli_connect("localhost", "root", "root", "atukoran_db");
                 }else{
                     $waitlist_valid = "No";
                 }
-                $waitlist_created_on = substr($row["Created_on"], 0, 10);
+                $waitlist_created_on = substr($row["created_at"], 0, 10);
                 echo "
                 <tr>
                     <td scope='row'>$book_title</td>
