@@ -136,6 +136,9 @@ $db = mysqli_connect("localhost", "root", "root", "atukoran_db");
                 $loaned_on = rtrim($row["loaned_on"], '00:00:00');
                 $return_by = rtrim($row["return_by"], '00:00:00');
                 $returned_on = rtrim($row["returned_on"], '00:00:00');
+                if(!$returned_on){
+                    $returned_on = "Not returned";
+                }
                 //using book_id to get book title from books table
                 $book_title_query = "SELECT * FROM books WHERE book_id='$book_id' LIMIT 1";
                 $book_title_result = mysqli_query($db, $book_title_query);
