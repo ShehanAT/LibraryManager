@@ -21,7 +21,7 @@ session_start();
             $query = "SELECT * FROM loans WHERE user_id='$user_id' AND returned_on IS NULL AND return_by < CURDATE()";
             $results = mysqli_query($db, $query);
             if(mysqli_num_rows($results) == 0){
-                echo "<p>You have no overdue books</p>";
+                  echo "<p>You currently have no overdue books(You might still have fees due, check <a href='https://atukoran.myweb.cs.uwindsor.ca/project/php/user/userProfile/userDueFunds.php'>here</a>)</p>";
             }else{
                 //print list of issued books is a table
                 echo "
