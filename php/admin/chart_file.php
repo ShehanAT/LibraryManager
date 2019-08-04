@@ -64,12 +64,12 @@
         </head>
         <body>
             <br /><br />
-            <div style="width:900px;">
+               <div style="width:100%;">
                 <h3 align="center">Pie Charts of Library Statistics</h3>
                 <br />
-                <div id="piechart1" style="width: 900px; height: 500px;"></div>
-                <div id="piechart2" style="width: 900px; height: 500px;"></div>
-                <div id="piechart3" style="width: 900px; height: 500px;"></div>
+                <div id="piechart1" style="width: 450px; height: 250px;"></div>
+                <div id="piechart2" style="width: 450px; height: 250px;"></div>
+                <div id="piechart3" style="width: 450px; height: 250px;"></div>
             </div>
         </body>
     </html>
