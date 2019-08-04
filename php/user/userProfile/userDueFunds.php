@@ -77,7 +77,7 @@ session_start();
             </table> 
           
             <div>
-            <strong>Cummulative # of days past due date: <span>$overdueDays</span></strong>
+             <strong># of days past due date: <span>$overdueDays</span></strong>
             </div>
             <div>
             <strong>Cost per day: <span>$0.50</span></strong>
