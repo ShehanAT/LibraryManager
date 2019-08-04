@@ -19,3 +19,4 @@
 * 2019-07-26: added waitlist feature for issued books, added alert popup on adding user to waitlist, fixed navbar dropdown bug in user/issueBook and user/returnBook, added custom loan periods based on userType, fixed formating on /user/userProfile/userIssued.php, added high priority books feature.
 * 2019-07-30: refractored admin update user, admin update book sections with more readable + simpler form validations, refractored + fixed bugs on admin delete book section, fixed bugs on admin delete user section, made user section more resposive for mobile viewports, added charts from google charts api to admin overview section
 * 2019-08-03: added mysqli_real_escape_string for all $_POST variables, removed search bar with AJAX functionality(reason: too complex)
+* 2019-08-04: version 1.0.0 released.
