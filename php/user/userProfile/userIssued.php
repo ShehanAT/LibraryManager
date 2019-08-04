@@ -25,7 +25,7 @@ session_start();
         <?php 
             $db = mysqli_connect("localhost", "root", "root", "atukoran_db");
             $user_id = $_SESSION["user_id"];
-            $query = "SELECT * FROM loans WHERE user_id='$user_id' LIMIT 5";
+            $query = "SELECT * FROM loans WHERE user_id='$user_id'";
             $results = mysqli_query($db, $query);
             while($row = mysqli_fetch_assoc($results)){
                 $book_id = $row["book_id"];
