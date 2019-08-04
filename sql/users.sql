@@ -95,6 +95,7 @@ CREATE TABLE waitlist (
     `user_id` INT NOT NULL,
     `waitlist_id` INT NULL AUTO_INCREMENT,
     `isValid` DATETIME NULL,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ,
     PRIMARY KEY(`book_id`, `user_id`),
     KEY `waitlist_id` (`waitlist_id`)
 )ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
