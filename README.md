@@ -11,11 +11,12 @@ This is a project developed for a Web Development class offered by the Universit
 ### Platform:
 This project was developed using XAMPP web server software version 8. The web application should be able to run all major operating systems(Windows, Mac OSX, Ubuntu, Debian, etc..) 
 
-# Local Development Instruction: 
+# Local Deployment Instructions: 
 1. Clone repo
 2. Navigate to project root folder  
-3. copy all contents in root folder into your local XAMPP installation path's ```htdocs``` folder 
-4. start Apache server and MySQL database on XAMMP Control Panel  
+3. Copy all contents in root folder into your local XAMPP installation path's ```htdocs``` folder 
+4. Start Apache server and MySQL database on XAMMP Control Panel  
+5. Visit ```http://localhost:<YOUR_PORT_NUMBER>```, where ```<YOUR_PORT_NUMBER>``` is the port number displayed in XAMPP Apache port number section
 
 # Screenshots: 
 Welcome page:
