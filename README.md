@@ -1,5 +1,5 @@
 
-# Library Management System built with HTML, PHP and MySQL
+# Library Management System
 
 # Overview:
 This is a project developed for a Web Development class offered by the University of Windsor in 2019. It is a Library management system that allows users to issue books, return books, make changes to their user profile, track and pay overdue book fines. It is build using PHP, JavaScript, MariaDB, and CSS. 
