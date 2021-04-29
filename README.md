@@ -16,7 +16,7 @@ This project was developed using XAMPP web server software version 8. The web ap
 2. Navigate to project root folder  
 3. Copy all contents in root folder into your local XAMPP installation path's ```htdocs``` folder 
 4. Start Apache server and MySQL database on XAMMP Control Panel  
-5. Visit ```http://localhost:<YOUR_PORT_NUMBER>```, where ```<YOUR_PORT_NUMBER>``` is the port number displayed in XAMPP Apache port number section
+5. Visit ```http://localhost:<YOUR_PORT_NUMBER>```, where ```<YOUR_PORT_NUMBER>``` is the port number displayed in the XAMPP Apache port number section
 
 # Screenshots: 
 Welcome page:
