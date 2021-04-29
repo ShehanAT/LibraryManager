@@ -1,22 +1,31 @@
 
 # Library Management System built with HTML, PHP and MySQL
-#### Final Project for COMP-3340
 
+# Overview:
+This is a project developed for a Web Development class offered by the University of Windsor in 2019. It is a Library management system that allows users to issue books, return books, make changes to their user profile, track and pay overdue book fines. It is build using PHP, JavaScript, MariaDB, and CSS. 
 
-### Next Step:
-* Search for book functionality using AJAX calls javascript to php
+### Dependencies:
+* PHP 8.x
+* MariaDB 10.x
 
+### Platform:
+This project was developed using XAMPP web server software version 8. The web application should be able to run all major operating systems(Windows, Mac OSX, Ubuntu, Debian, etc..) 
 
+# Local Development Instruction: 
+1. Clone repo
+2. Navigate to project root folder  
+3. copy all contents in root folder into your local XAMPP installation path's ```htdocs``` folder 
+4. start Apache server and MySQL database on XAMMP Control Panel  
 
-### Project Logs:
-* Added loanBook.php template, implement read all books from database then display all book in select tag.
-* Added boostrap navbar, book uniqueness verification when about to issue book, and display all loans per user section.
-* Added user profile info section, user issued books section, user overdue books section, user overdue book fees section.
-* Added admin overview, admin add user sections, admin delete user section, admin user update section, admin user delete and update sections.
-* 2019-07-22:made UI improvements to user overduebooks, and user overduefees sections.
-* 2019-07-24: project put on hold.
-* 2019-07-24: working on waitlist feature implementation.
-* 2019-07-26: added waitlist feature for issued books, added alert popup on adding user to waitlist, fixed navbar dropdown bug in user/issueBook and user/returnBook, added custom loan periods based on userType, fixed formating on /user/userProfile/userIssued.php, added high priority books feature.
-* 2019-07-30: refractored admin update user, admin update book sections with more readable + simpler form validations, refractored + fixed bugs on admin delete book section, fixed bugs on admin delete user section, made user section more resposive for mobile viewports, added charts from google charts api to admin overview section
-* 2019-08-03: added mysqli_real_escape_string for all $_POST variables, removed search bar with AJAX functionality(reason: too complex)
-* 2019-08-04: version 1.0.0 released, added loan table ui "Not returned" text if book not returned.
+# Screenshots: 
+Welcome page:
+![Main page](/images/screenshot_1.png)
+
+Library Statistics page:
+![Thread view page](/images/screenshot_2.png)
+
+Admin Add Book page:
+![Post view page](/images/screenshot_3.png)
+
+### Contributing:
+Please feel free to contribute to this project however possible by forking this repo, making changes and initiating pull requests. Thanks!
